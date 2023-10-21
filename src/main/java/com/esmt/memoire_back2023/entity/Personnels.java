@@ -33,15 +33,15 @@ public class Personnels{
     @Column(name = "password", length = 255)
     private String password;
 
-    @Column(name = "type", length = 255)
+    @Column(name = "rolePersonnel", length = 255)
     @Enumerated(EnumType.STRING)
-    private UserRole type;
+    private UserRole role;
 
     @Column(name = "status", length = 45)
     private Long status;
 
-    @Column(name = "rolePersonnel", length = 255)
-    private String role;
+    @Column(name = "type", length = 255)
+    private String type;
 
     @Column(name = "specialite", length = 255)
     private String specialite;
@@ -52,7 +52,7 @@ public class Personnels{
     public Personnels() {
     }
 
-    public Personnels(Long idPersonnel, String nom, String prenom, String sexe, String lieuNaissance, String numLicence, String login, String password, UserRole type, Long status, String role, String specialite, String etat) {
+    public Personnels(Long idPersonnel, String nom, String prenom, String sexe, String lieuNaissance, String numLicence, String login, String password, UserRole role, Long status, String type, String specialite, String etat) {
         this.idPersonnel = idPersonnel;
         this.nom = nom;
         this.prenom = prenom;
@@ -72,7 +72,7 @@ public class Personnels{
         return idPersonnel;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
@@ -112,7 +112,7 @@ public class Personnels{
         return password;
     }
 
-    public UserRole getType() {
+    public String getType() {
         return type;
     }
 
@@ -149,7 +149,7 @@ public class Personnels{
         this.password = password;
     }
 
-    public void setType(UserRole type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -161,7 +161,7 @@ public class Personnels{
         this.idPersonnel = idPersonnel;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

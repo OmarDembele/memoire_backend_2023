@@ -2,6 +2,7 @@ package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.AdminDTO;
 import com.esmt.memoire_back2023.entity.Admin;
+import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.repository.AdminRepository;
 import com.esmt.memoire_back2023.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class AdminImpl implements AdminService {
 
     @Override
     public Admin creerAdmin(AdminDTO adminDTO) {
-        Admin admin = new Admin();
+        Admin admin = convertDTOToEntity(adminDTO);
         adminRepository.save(admin);
         return admin;
     }
@@ -32,9 +33,9 @@ public class AdminImpl implements AdminService {
         admin.setSexe(adminDTO.getSexe());
         admin.setLieuNaissance(adminDTO.getLieuNaissance());
         admin.setNumLicence(adminDTO.getNumLicence());
-        admin.setType(adminDTO.getType());
         admin.setStatus(adminDTO.getStatus());
         admin.setRole(adminDTO.getRole());
+        admin.setSpecialite(adminDTO.getSpecialite());
         admin.setLogin(adminDTO.getLogin());
         admin.setPassword(this.passwordEncoder.encode(adminDTO.getPassword()));
         return admin;

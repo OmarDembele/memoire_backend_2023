@@ -12,16 +12,16 @@ public class PersonnelsDTO {
     private String numLicence;
     private String login;
     private String password;
-    private UserRole type;
+    private UserRole role;
     private Long status;
-    private String role;
+    private String type;
     private String specialite;
     private String etat;
 
     public PersonnelsDTO() {
     }
 
-    public PersonnelsDTO(Long idPersonnel, String nom, String prenom, String sexe, String lieuNaissance, String numLicence, String login, String password, UserRole type, Long status, String role, String specialite, String etat) {
+    public PersonnelsDTO(Long idPersonnel, String nom, String prenom, String sexe, String lieuNaissance, String numLicence, String login, String password, String type, Long status, UserRole role, String specialite, String etat) {
         this.idPersonnel = idPersonnel;
         this.nom = nom;
         this.prenom = prenom;
@@ -69,7 +69,7 @@ public class PersonnelsDTO {
         return password;
     }
 
-    public UserRole getType() {
+    public String getType() {
         return type;
     }
 
@@ -77,7 +77,7 @@ public class PersonnelsDTO {
         return status;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
@@ -87,6 +87,58 @@ public class PersonnelsDTO {
 
     public String getEtat() {
         return etat;
+    }
+
+    public void setIdPersonnel(Long idPersonnel) {
+        this.idPersonnel = idPersonnel;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public void setLieuNaissance(String lieuNaissance) {
+        this.lieuNaissance = lieuNaissance;
+    }
+
+    public void setNumLicence(String numLicence) {
+        this.numLicence = numLicence;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
 }
 

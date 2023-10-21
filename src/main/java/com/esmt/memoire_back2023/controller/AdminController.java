@@ -15,6 +15,10 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    public AdminController(AdminService adminService) {
+        this.adminService = adminService;
+    }
+
     @PostMapping(path = "/save")
     public Admin addAdmin(@RequestBody AdminDTO adminDTO) {
         Admin admin = adminService.creerAdmin(adminDTO);

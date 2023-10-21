@@ -26,37 +26,37 @@ public class Admin{
     @Column(name = "numLicence", length = 255)
     private String numLicence;
 
+    @Column(name = "roleAdmin", length = 255)
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
     @Column(name = "login", length = 255)
     private String login;
 
     @Column(name = "password", length = 255)
     private String password;
 
-    @Column(name = "type", length = 255)
-    @Enumerated(EnumType.STRING)
-    private UserRole type;
-
     @Column(name = "status", length = 45)
     private Long status;
 
-    @Column(name = "roleAdmin", length = 255)
-    private String role;
+    @Column(name = "specialite", length = 255)
+    private String specialite;
 
     public Admin() {
     }
 
-    public Admin(Long idAdmin, String nom, String prenom, String sexe, String lieuNaissance, String numLicence, String login, String password, UserRole type, Long status, String role) {
+    public Admin(Long idAdmin, String nom, String prenom, String sexe, String lieuNaissance, String numLicence, UserRole role, String login, String password, Long status, String specialite) {
         this.idAdmin = idAdmin;
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
         this.lieuNaissance = lieuNaissance;
         this.numLicence = numLicence;
+        this.role = role;
         this.login = login;
         this.password = password;
-        this.type = type;
         this.status = status;
-        this.role = role;
+        this.specialite = specialite;
     }
 
     public Long getIdAdmin() {
@@ -83,6 +83,10 @@ public class Admin{
         return numLicence;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -91,16 +95,12 @@ public class Admin{
         return password;
     }
 
-    public UserRole getType() {
-        return type;
-    }
-
     public Long getStatus() {
         return status;
     }
 
-    public String getRole() {
-        return role;
+    public String getSpecialite() {
+        return specialite;
     }
 
     public void setIdAdmin(Long idAdmin) {
@@ -135,15 +135,15 @@ public class Admin{
         this.password = password;
     }
 
-    public void setType(UserRole type) {
-        this.type = type;
-    }
-
     public void setStatus(Long status) {
         this.status = status;
     }
 
-    public void setRole(String role) {
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
+    }
+
+    public void setRole(UserRole role) {
         this.role = role;
     }
 }

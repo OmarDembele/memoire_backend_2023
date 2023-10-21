@@ -45,25 +45,25 @@ public class LoginImpl implements LoginService {
         if(admin1 != null){
             String password = loginDTO.getPassword();
             String encodedPassword = admin1.getPassword();
-            String type = String.valueOf(admin1.getType());
+            String role = admin1.getRole().name();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
             if(isPwdRight){
                 Optional<Admin> admin = adminRepository.findOneByLoginAndPassword(loginDTO.getLogin(), encodedPassword);
 
                 if(admin.isPresent()){
-                    return new LoginMessage("Login Success", true, type);
+                    return new LoginMessage("Login Success", true, role);
                 }
                 else{
-                    return new LoginMessage("Login Failed", false, type);
+                    return new LoginMessage("Login Failed", false, role);
                 }
             }
             else{
-                return new LoginMessage("Password not match", false, type);
+                return new LoginMessage("Password not match", false, role);
             }
         }
         else if(personnels != null) {
             String password = loginDTO.getPassword();
-            String role = personnels.getType().name();
+            String role = personnels.getRole().name();
             String encodedPassword = personnels.getPassword();
             Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
             if(isPwdRight){
