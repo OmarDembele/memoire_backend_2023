@@ -4,8 +4,12 @@ import com.esmt.memoire_back2023.dto.PatientDTO;
 import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.repository.DossierRepository;
+import com.esmt.memoire_back2023.repository.PatientRepository;
 import com.esmt.memoire_back2023.services.PatientService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,15 +23,19 @@ public class PatientController {
     @Autowired
     private DossierRepository dossierRepository;
 
-    public PatientController(PatientService patientService, DossierRepository dossierRepository) {
+    @Autowired
+    private PatientRepository patientRepository;
+
+    public PatientController(PatientService patientService, DossierRepository dossierRepository, PatientRepository patientRepository) {
         this.patientService = patientService;
         this.dossierRepository = dossierRepository;
+        this.patientRepository = patientRepository;
     }
 
 
     @PostMapping(path = "/save")
-    public Patient addPatient(@RequestBody PatientDTO patientDTO) {
+    public Long addPatient(@RequestBody PatientDTO patientDTO) {
         Patient patient = patientService.creerPatients(patientDTO);
-        return patient;
+        return new ResponseEntity<>(patient.getIdPatient(), HttpStatus.CREATED).getBody();
     }
 }

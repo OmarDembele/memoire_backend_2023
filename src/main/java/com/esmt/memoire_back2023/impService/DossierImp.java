@@ -19,11 +19,16 @@ public class DossierImp implements DossierService {
     @Autowired
     private PatientRepository patientRepository;
 
+    public DossierImp(DossierRepository dossierRepository, PatientRepository patientRepository) {
+        this.dossierRepository = dossierRepository;
+        this.patientRepository = patientRepository;
+    }
+
     @Override
     public DossierMedical creerDossier(DossierDTO dossierDTO) {
         DossierMedical dossierMedical = convertDTOToEntity(dossierDTO);
         dossierRepository.save(dossierMedical);
-        return null;
+        return dossierMedical;
     }
 
     private DossierMedical convertDTOToEntity(DossierDTO dossierDTO){
@@ -31,11 +36,6 @@ public class DossierImp implements DossierService {
         dossierMedical.setDateCreation(dossierDTO.getDateCreation());
         dossierMedical.setDescription(dossierDTO.getDescription());
 
-        if (dossierDTO.getPatientId() != null) {
-            Patient patient = patientRepository.findById(dossierDTO.getPatientId())
-                    .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + dossierDTO.getPatientId()));
-            dossierMedical.setPatient(patient);
-        }
         return  dossierMedical;
     }
 }

@@ -29,12 +29,12 @@ public class PatientImpl implements PatientService {
     public Patient creerPatients(PatientDTO patientDTO) {
         Patient patient = convertDTOToEntity(patientDTO);
         patientRepository.save(patient);
+
         return patient;
     }
 
     private Patient convertDTOToEntity(PatientDTO patientDTO){
         Patient patient = new Patient();
-        DossierMedical dossierMedical = new DossierMedical();
 
         patient.setNom(patientDTO.getNom());
         patient.setPrenom(patientDTO.getPrenom());

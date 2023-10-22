@@ -45,8 +45,7 @@ public class Patient {
     )
     private Set<Consultation> consultations = new HashSet<>();
 
-    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
-    @JoinColumn(name = "dossier_medical_id")
+    @OneToOne(cascade = CascadeType.ALL)
     private DossierMedical dossierMedical;
 
     public Patient() {

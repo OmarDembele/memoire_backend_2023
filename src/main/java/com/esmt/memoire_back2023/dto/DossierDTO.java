@@ -9,7 +9,6 @@ public class DossierDTO {
 
     private String description;
 
-    private Long patientId;
 
 
     public DossierDTO() {
@@ -21,12 +20,6 @@ public class DossierDTO {
         this.description = description;
     }
 
-    public DossierDTO(Long idDossier, String dateCreation, String description, Long patientId) {
-        IdDossier = idDossier;
-        this.dateCreation = dateCreation;
-        this.description = description;
-        this.patientId = patientId;
-    }
 
     public Long getIdDossier() {
         return IdDossier;
@@ -52,12 +45,5 @@ public class DossierDTO {
         this.description = description;
     }
 
-    public Long getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
-    }
 }
 
