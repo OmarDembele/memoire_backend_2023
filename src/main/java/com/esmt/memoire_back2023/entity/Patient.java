@@ -76,6 +76,9 @@ public class Patient {
         this.dossierMedical = dossierMedical;
     }
 
+    public Patient(Long patientId) {
+    }
+
     public Long getIdPatient() {
         return idPatient;
     }

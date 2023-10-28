@@ -2,6 +2,9 @@ package com.esmt.memoire_back2023.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "Personnels")
@@ -49,6 +52,15 @@ public class Personnels{
     @Column(name = "etat", length = 255)
     private String etat;
 
+    @OneToMany(mappedBy = "medecinTraitant")
+    private List<Consultation> consultationsTraitant;
+
+    @OneToMany(mappedBy = "medecinConsultant")
+    private List<Consultation> consultationsConsultant;
+
+    @OneToMany(mappedBy = "medecinChirurgien")
+    private List<Consultation> consultationsChirurgien;
+
     public Personnels() {
     }
 
@@ -66,6 +78,28 @@ public class Personnels{
         this.role = role;
         this.specialite = specialite;
         this.etat = etat;
+    }
+
+    public Personnels(Long idPersonnel, String nom, String prenom, String sexe, String lieuNaissance, String numLicence, String login, String password, UserRole role, Long status, String type, String specialite, String etat, List<Consultation> consultationsTraitant, List<Consultation> consultationsConsultant, List<Consultation> consultationsChirurgien) {
+        this.idPersonnel = idPersonnel;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sexe = sexe;
+        this.lieuNaissance = lieuNaissance;
+        this.numLicence = numLicence;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+        this.status = status;
+        this.type = type;
+        this.specialite = specialite;
+        this.etat = etat;
+        this.consultationsTraitant = consultationsTraitant;
+        this.consultationsConsultant = consultationsConsultant;
+        this.consultationsChirurgien = consultationsChirurgien;
+    }
+
+    public Personnels(Long medecinTraitantId) {
     }
 
     public Long getIdPersonnel() {
@@ -173,12 +207,28 @@ public class Personnels{
         this.etat = etat;
     }
 
+    public List<Consultation> getConsultationsTraitant() {
+        return consultationsTraitant;
+    }
 
+    public void setConsultationsTraitant(List<Consultation> consultationsTraitant) {
+        this.consultationsTraitant = consultationsTraitant;
+    }
+
+    public List<Consultation> getConsultationsConsultant() {
+        return consultationsConsultant;
+    }
+
+    public void setConsultationsConsultant(List<Consultation> consultationsConsultant) {
+        this.consultationsConsultant = consultationsConsultant;
+    }
+
+    public List<Consultation> getConsultationsChirurgien() {
+        return consultationsChirurgien;
+    }
+
+    public void setConsultationsChirurgien(List<Consultation> consultationsChirurgien) {
+        this.consultationsChirurgien = consultationsChirurgien;
+    }
 }
 
- /*
-    @OneToOne
-    @JoinColumn(name = "utilisateur_id")
-    private Utilisateur utilisateur;
-
-     */
