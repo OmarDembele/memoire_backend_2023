@@ -11,7 +11,7 @@ public class Consultation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConsultation;
 
-    @ManyToMany(mappedBy = "consultations")
+    @ManyToMany(mappedBy = "consultations", cascade = CascadeType.REMOVE)
     private Set<Patient> patients = new HashSet<>();
 
     @ManyToOne

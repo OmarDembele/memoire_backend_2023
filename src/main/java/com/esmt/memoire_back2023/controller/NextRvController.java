@@ -23,4 +23,9 @@ public class NextRvController {
         NextRv nextRv = nextRvService.addRv(nextRvDTO);
         return new ResponseEntity<>(nextRv.getId(), HttpStatus.CREATED).getBody();
     }
+
+    @DeleteMapping("/{id}")
+    public void supprimerNextRV(@PathVariable Long id) {
+        nextRvService.deleteNextRV(id);
+    }
 }

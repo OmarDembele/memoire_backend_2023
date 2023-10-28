@@ -6,4 +6,6 @@ import com.esmt.memoire_back2023.entity.Prescription;
 public interface PrescriptionService {
 
     Prescription creerPresc(PrescriptionDTO prescriptionDTO);
+
+    void delletePresc(Long id);
 }

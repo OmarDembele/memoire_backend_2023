@@ -6,4 +6,6 @@ import com.esmt.memoire_back2023.entity.NextRv;
 public interface NextRvService {
 
     NextRv addRv(NextRvDTO nextRvDTO);
+
+    void deleteNextRV(Long id);
 }

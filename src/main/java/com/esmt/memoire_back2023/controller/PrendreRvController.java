@@ -23,4 +23,9 @@ public class PrendreRvController {
         PrendreRv prendreRv = prendreRvService.prendreRv(prendreRvDTO);
         return prendreRv;
     }
+
+    @DeleteMapping("/{id}")
+    public void supprimerPrendreRV(@PathVariable Long id) {
+        prendreRvService.deletePrendreRvService(id);
+    }
 }

@@ -21,4 +21,9 @@ public class PrescriptionController {
         Prescription prescription = prescriptionService.creerPresc(prescriptionDTO);
         return prescription;
     }
+
+    @DeleteMapping("/{id}")
+    public void supprimerPresc(@PathVariable Long id) {
+        prescriptionService.delletePresc(id);
+    }
 }

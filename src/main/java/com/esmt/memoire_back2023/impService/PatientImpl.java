@@ -1,6 +1,7 @@
 package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.PatientDTO;
+import com.esmt.memoire_back2023.entity.Consultation;
 import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.repository.DossierRepository;
@@ -31,6 +32,14 @@ public class PatientImpl implements PatientService {
         patientRepository.save(patient);
 
         return patient;
+    }
+
+    @Override
+    public void deletePatient(Long id) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Consultation non trouvé avec l'ID : " + id));
+        patientRepository.delete(patient);
+        dossierMedicalRepository.delete(patient.getDossierMedical());
     }
 
     private Patient convertDTOToEntity(PatientDTO patientDTO){

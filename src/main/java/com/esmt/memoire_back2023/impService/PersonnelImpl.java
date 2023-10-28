@@ -1,12 +1,18 @@
 package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.PersonnelsDTO;
+import com.esmt.memoire_back2023.entity.Admin;
 import com.esmt.memoire_back2023.entity.Personnels;
+import com.esmt.memoire_back2023.entity.UserRole;
 import com.esmt.memoire_back2023.repository.PersonnelsRepository;
 import com.esmt.memoire_back2023.services.PersonnelService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonnelImpl implements PersonnelService {
@@ -22,6 +28,13 @@ public class PersonnelImpl implements PersonnelService {
         Personnels personnels = convertDTOToEntity(personnelsDTO);
         personnelsRepository.save(personnels);
         return personnels;
+    }
+
+    @Override
+    public void deletePersonnel(Long id) {
+        Personnels personnels = personnelsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Admin non trouvé avec l'ID : " + id));
+        personnelsRepository.delete(personnels);
     }
 
     private Personnels convertDTOToEntity(PersonnelsDTO personnelsDTO) {
@@ -43,21 +56,41 @@ public class PersonnelImpl implements PersonnelService {
 
     }
 
-   /* private Utilisateur convertDTOToUtilisateur(UtilisateurDTO utilisateurDTO) {
+    @Override
+    public List<Personnels> trierParRole(UserRole role) {
+        return personnelsRepository.findByRole(role);
+    }
 
-        Utilisateur utilisateur = new Utilisateur();
+    @Override
+    public Personnels updatePersonnels(Long id, PersonnelsDTO personnelsDTO) {
+        Personnels personnelsToUpdate = convertDTOToEntity(personnelsDTO);
 
-        utilisateur.setId(utilisateur.getId());
-        utilisateur.setNom(utilisateurDTO.getNom());
-        utilisateur.setPrenom(utilisateurDTO.getPrenom());
-        utilisateur.setSexe(utilisateurDTO.getSexe());
-        utilisateur.setLieuNaissance(utilisateurDTO.getLieuNaissance());
-        utilisateur.setNumLicence(utilisateurDTO.getNumLicence());
-        utilisateur.setType(utilisateurDTO.getType());
-        utilisateur.setStatus(utilisateurDTO.getStatus());
-        utilisateur.setLogin(utilisateurDTO.getLogin());
-        this.passwordEncoder.encode(utilisateurDTO.getPassword());
-        return utilisateur;
+        Optional<Personnels> existingPersonnels = personnelsRepository.findById(id);
+        if (!existingPersonnels.isPresent()) {
+            return null;
+        }
+        Personnels updatedPersonnels = existingPersonnels.get();
 
-    }*/
+        updatedPersonnels.setNom(personnelsDTO.getNom());
+        updatedPersonnels.setPrenom(personnelsDTO.getPrenom());
+        updatedPersonnels.setSexe(personnelsDTO.getSexe());
+        updatedPersonnels.setLieuNaissance(personnelsDTO.getLieuNaissance());
+        updatedPersonnels.setNumLicence(personnelsDTO.getNumLicence());
+        updatedPersonnels.setType(personnelsDTO.getType());
+        updatedPersonnels.setStatus(personnelsDTO.getStatus());
+        updatedPersonnels.setSpecialite(personnelsDTO.getSpecialite());
+        updatedPersonnels.setEtat(personnelsDTO.getEtat());
+        updatedPersonnels.setRole(personnelsDTO.getRole());
+        updatedPersonnels.setLogin(personnelsDTO.getLogin());
+
+        if (personnelsDTO.getPassword() != null) {
+            updatedPersonnels.setPassword(this.passwordEncoder.encode(personnelsDTO.getPassword()));
+        }
+
+        updatedPersonnels = personnelsRepository.save(updatedPersonnels);
+
+        return updatedPersonnels;
+    }
+
+
 }

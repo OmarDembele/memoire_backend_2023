@@ -6,4 +6,6 @@ import com.esmt.memoire_back2023.entity.ExamenMedical;
 public interface ExamenService {
 
     ExamenMedical creerExamen(ExamenDTO examenDTO);
+
+    void delleteExam(Long id);
 }

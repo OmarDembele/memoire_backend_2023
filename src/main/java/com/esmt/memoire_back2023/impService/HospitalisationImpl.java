@@ -1,6 +1,7 @@
 package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.HospitalisationDTO;
+import com.esmt.memoire_back2023.entity.Consultation;
 import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.Hospitalisation;
 import com.esmt.memoire_back2023.repository.HospitalisationRepository;
@@ -21,6 +22,13 @@ public class HospitalisationImpl implements HospitalisationService {
         Hospitalisation hospitalisation = convertDTOToEntity(hospitalisationDTO);
         hospitalisationRepository.save(hospitalisation);
         return hospitalisation;
+    }
+
+    @Override
+    public void deleteHospi(Long id) {
+        Hospitalisation hospitalisation = hospitalisationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Id inexistant : " + id));
+        hospitalisationRepository.delete(hospitalisation);
     }
 
     private Hospitalisation convertDTOToEntity(HospitalisationDTO hospitalisationDTO){

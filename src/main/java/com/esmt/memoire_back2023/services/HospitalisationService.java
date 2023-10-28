@@ -6,4 +6,6 @@ import com.esmt.memoire_back2023.entity.Hospitalisation;
 public interface HospitalisationService {
 
     Hospitalisation creerHospi(HospitalisationDTO hospitalisationDTO);
+
+    void deleteHospi(Long id);
 }

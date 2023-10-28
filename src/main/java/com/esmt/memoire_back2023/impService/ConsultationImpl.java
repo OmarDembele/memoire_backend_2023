@@ -7,6 +7,7 @@ import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.repository.ConsultationRepository;
 import com.esmt.memoire_back2023.services.ConsultationService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,13 @@ public class ConsultationImpl implements ConsultationService {
         Consultation consultation = convertDTOToEntity(consultationDTO);
         consultationRepository.save(consultation);
         return consultation;
+    }
+
+    @Override
+    public void deleteConsultation(Long id) {
+        Consultation consultation = consultationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Consultation non trouvé avec l'ID : " + id));
+        consultationRepository.delete(consultation);
     }
 
     public Consultation convertDTOToEntity(ConsultationDTO consultationDTO) {

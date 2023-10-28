@@ -5,9 +5,12 @@ import com.esmt.memoire_back2023.entity.Admin;
 import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.repository.AdminRepository;
 import com.esmt.memoire_back2023.services.AdminService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AdminImpl implements AdminService {
@@ -23,6 +26,42 @@ public class AdminImpl implements AdminService {
         Admin admin = convertDTOToEntity(adminDTO);
         adminRepository.save(admin);
         return admin;
+    }
+
+    @Override
+    public void deleteAdmin(Long id) {
+        Admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Admin non trouvé avec l'ID : " + id));
+        adminRepository.delete(admin);
+    }
+
+    @Override
+    public Admin updateAdmin(Long id, AdminDTO adminDTO) {
+        Admin adminToUpdate = convertDTOToEntity(adminDTO);
+
+        Optional<Admin> existingAdmin = adminRepository.findById(id);
+        if (!existingAdmin.isPresent()) {
+            return null;
+        }
+        Admin updatedAdmin = existingAdmin.get();
+
+        updatedAdmin.setNom(adminToUpdate.getNom());
+        updatedAdmin.setPrenom(adminToUpdate.getPrenom());
+        updatedAdmin.setSexe(adminToUpdate.getSexe());
+        updatedAdmin.setLieuNaissance(adminToUpdate.getLieuNaissance());
+        updatedAdmin.setNumLicence(adminToUpdate.getNumLicence());
+        updatedAdmin.setStatus(adminToUpdate.getStatus());
+        updatedAdmin.setRole(adminToUpdate.getRole());
+        updatedAdmin.setSpecialite(adminToUpdate.getSpecialite());
+        updatedAdmin.setLogin(adminToUpdate.getLogin());
+
+        if (adminDTO.getPassword() != null) {
+            updatedAdmin.setPassword(this.passwordEncoder.encode(adminDTO.getPassword()));
+        }
+
+        updatedAdmin = adminRepository.save(updatedAdmin);
+
+        return updatedAdmin;
     }
 
     private Admin convertDTOToEntity(AdminDTO adminDTO) {
@@ -44,21 +83,3 @@ public class AdminImpl implements AdminService {
 
 
 }
-
-
-/*private Utilisateur convertDTOToUtilisateur(UtilisateurDTO utilisateurDTO) {
-
-        Utilisateur utilisateur = new Utilisateur();
-
-        utilisateur.setNom(utilisateurDTO.getNom());
-        utilisateur.setPrenom(utilisateurDTO.getPrenom());
-        utilisateur.setSexe(utilisateurDTO.getSexe());
-        utilisateur.setLieuNaissance(utilisateurDTO.getLieuNaissance());
-        utilisateur.setNumLicence(utilisateurDTO.getNumLicence());
-        utilisateur.setType(utilisateurDTO.getType());
-        utilisateur.setStatus(utilisateurDTO.getStatus());
-        utilisateur.setLogin(utilisateurDTO.getLogin());
-        this.passwordEncoder.encode(utilisateurDTO.getPassword());
-        return utilisateur;
-
-    }*/

@@ -5,4 +5,6 @@ import com.esmt.memoire_back2023.entity.Consultation;
 
 public interface ConsultationService {
     Consultation addConsultation(ConsultationDTO consultationDTO);
+
+    void deleteConsultation(Long id);
 }

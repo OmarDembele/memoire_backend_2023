@@ -2,6 +2,7 @@ package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.PrescriptionDTO;
 import com.esmt.memoire_back2023.entity.Hospitalisation;
+import com.esmt.memoire_back2023.entity.PrendreRv;
 import com.esmt.memoire_back2023.entity.Prescription;
 import com.esmt.memoire_back2023.repository.PrescriptionRepository;
 import com.esmt.memoire_back2023.services.PrescriptionService;
@@ -21,6 +22,13 @@ public class PrescriptionImpl implements PrescriptionService {
         Prescription prescription = convertDTOToEntity(prescriptionDTO);
         prescriptionRepository.save(prescription);
         return prescription;
+    }
+
+    @Override
+    public void delletePresc(Long id) {
+        Prescription prescription = prescriptionRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("L'id n'existe pas : " + id));
+        prescriptionRepository.delete(prescription);
     }
 
     private Prescription convertDTOToEntity(PrescriptionDTO prescriptionDTO){

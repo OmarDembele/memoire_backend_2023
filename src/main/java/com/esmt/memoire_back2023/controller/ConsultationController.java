@@ -23,4 +23,9 @@ public class ConsultationController {
         Consultation consultation = consultationService.addConsultation(consultationDTO);
         return consultation;
     }
+
+    @DeleteMapping("/{id}")
+    public void supprimerConsultation(@PathVariable Long id) {
+        consultationService.deleteConsultation(id);
+    }
 }

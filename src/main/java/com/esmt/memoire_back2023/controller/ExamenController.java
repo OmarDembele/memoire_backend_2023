@@ -24,4 +24,9 @@ public class ExamenController {
         ExamenMedical examenMedical = examenService.creerExamen(examenDTO);
         return examenMedical;
     }
+
+    @DeleteMapping("/{id}")
+    public void supprimerExam(@PathVariable Long id) {
+        examenService.delleteExam(id);
+    }
 }

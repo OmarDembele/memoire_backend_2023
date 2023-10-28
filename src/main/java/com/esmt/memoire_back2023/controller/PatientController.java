@@ -38,4 +38,9 @@ public class PatientController {
         Patient patient = patientService.creerPatients(patientDTO);
         return new ResponseEntity<>(patient.getIdPatient(), HttpStatus.CREATED).getBody();
     }
+
+    @DeleteMapping("/{id}")
+    public void supprimerPatient(@PathVariable Long id) {
+        patientService.deletePatient(id);
+    }
 }

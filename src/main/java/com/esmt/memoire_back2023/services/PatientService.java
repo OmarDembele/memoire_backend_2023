@@ -8,4 +8,6 @@ import com.esmt.memoire_back2023.entity.Patient;
 public interface PatientService {
     Patient creerPatients(PatientDTO patientDTO);
 
+    void deletePatient(Long id);
+
 }

@@ -23,4 +23,9 @@ public class HospitalisationController {
         Hospitalisation hospitalisation = hospitalisationService.creerHospi(hospitalisationDTO);
         return hospitalisation;
     }
+
+    @DeleteMapping("/{id}")
+    public void supprimerHospi(@PathVariable Long id) {
+        hospitalisationService.deleteHospi(id);
+    }
 }
