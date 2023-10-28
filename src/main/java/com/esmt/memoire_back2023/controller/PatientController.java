@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -34,8 +37,13 @@ public class PatientController {
 
 
     @PostMapping(path = "/save")
-    public Long addPatient(@RequestBody PatientDTO patientDTO) {
+    public ResponseEntity<Long> addPatient(@RequestBody PatientDTO patientDTO) {
         Patient patient = patientService.creerPatients(patientDTO);
-        return new ResponseEntity<>(patient.getIdPatient(), HttpStatus.CREATED).getBody();
+        return new ResponseEntity<>(patient.getIdPatient(), HttpStatus.CREATED);
     }
+    @GetMapping(path = "/list")
+    public List<PatientDTO> getAllPatients() {
+        return patientService.obtenirTousLesPatients();
+    }
+
 }

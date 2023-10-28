@@ -1,5 +1,6 @@
 package com.esmt.memoire_back2023.impService;
 
+import com.esmt.memoire_back2023.dto.DossierDTO;
 import com.esmt.memoire_back2023.dto.PatientDTO;
 import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.Patient;
@@ -10,8 +11,10 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
+import java.util.stream.Collectors;
 
+@Service
 public class PatientImpl implements PatientService {
 
     @Autowired
@@ -29,11 +32,10 @@ public class PatientImpl implements PatientService {
     public Patient creerPatients(PatientDTO patientDTO) {
         Patient patient = convertDTOToEntity(patientDTO);
         patientRepository.save(patient);
-
         return patient;
     }
 
-    private Patient convertDTOToEntity(PatientDTO patientDTO){
+    private Patient convertDTOToEntity(PatientDTO patientDTO) {
         Patient patient = new Patient();
 
         patient.setNom(patientDTO.getNom());
@@ -50,8 +52,31 @@ public class PatientImpl implements PatientService {
                     .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + patientDTO.getDossierMedicalId()));
             patient.setDossierMedical(dossierMedical1);
         } else {
-            patient.setDossierMedical(patientDTO.getDossierMedical());
+
         }
-        return  patient;
+        return patient;
+    }
+
+    @Override
+    public List<PatientDTO> obtenirTousLesPatients() {
+        // Récupérer les entités depuis la base de données
+        List<Patient> patients = patientRepository.findAll();
+
+        // Convertir les entités en DTOs
+        List<PatientDTO> patientDTOS = patients.stream()
+                .map(patient -> new PatientDTO(
+                        patient.getIdPatient(),
+                        patient.getNom(),
+                        patient.getPrenom(),
+                        patient.getSexe(),
+                        patient.getLieuNaissance(),
+                        patient.getDateNaissance(),
+                        patient.getAdresse(),
+                        patient.getEmail(),
+                        patient.getTelephone()
+                ))
+                .collect(Collectors.toList());
+
+        return patientDTOS;
     }
 }

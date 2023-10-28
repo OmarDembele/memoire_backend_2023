@@ -6,6 +6,9 @@ import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.services.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -24,4 +27,14 @@ public class PersonnelsController {
         Personnels personnels = personnelService.creerPersonnels(personnelsDTO);
         return personnels;
     }
+    @GetMapping(path = "/list")
+    public List<PersonnelsDTO> getAllPersonnels() {
+        return personnelService.getallPersonnels();
+    }
+
+    @GetMapping(path = "/{id}")
+    public PersonnelsDTO getPersonnelById(@PathVariable Long id) {
+        return personnelService.getPersonnelById(id);
+    }
+
 }
