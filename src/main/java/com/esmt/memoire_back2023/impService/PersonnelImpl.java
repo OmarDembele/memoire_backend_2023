@@ -50,23 +50,6 @@ public class PersonnelImpl implements PersonnelService {
 
     }
 
-   /* private Utilisateur convertDTOToUtilisateur(UtilisateurDTO utilisateurDTO) {
-
-        Utilisateur utilisateur = new Utilisateur();
-
-        utilisateur.setId(utilisateur.getId());
-        utilisateur.setNom(utilisateurDTO.getNom());
-        utilisateur.setPrenom(utilisateurDTO.getPrenom());
-        utilisateur.setSexe(utilisateurDTO.getSexe());
-        utilisateur.setLieuNaissance(utilisateurDTO.getLieuNaissance());
-        utilisateur.setNumLicence(utilisateurDTO.getNumLicence());
-        utilisateur.setType(utilisateurDTO.getType());
-        utilisateur.setStatus(utilisateurDTO.getStatus());
-        utilisateur.setLogin(utilisateurDTO.getLogin());
-        this.passwordEncoder.encode(utilisateurDTO.getPassword());
-        return utilisateur;
-
-    }*/
     public List<PersonnelsDTO> getallPersonnels() {
         List<Personnels> personnels = personnelsRepository.findAll();
 
@@ -93,6 +76,25 @@ public class PersonnelImpl implements PersonnelService {
 
 
     }
+
+
+    /* private Utilisateur convertDTOToUtilisateur(UtilisateurDTO utilisateurDTO) {
+
+         Utilisateur utilisateur = new Utilisateur();
+
+         utilisateur.setId(utilisateur.getId());
+         utilisateur.setNom(utilisateurDTO.getNom());
+         utilisateur.setPrenom(utilisateurDTO.getPrenom());
+         utilisateur.setSexe(utilisateurDTO.getSexe());
+         utilisateur.setLieuNaissance(utilisateurDTO.getLieuNaissance());
+         utilisateur.setNumLicence(utilisateurDTO.getNumLicence());
+         utilisateur.setType(utilisateurDTO.getType());
+         utilisateur.setStatus(utilisateurDTO.getStatus());
+         utilisateur.setLogin(utilisateurDTO.getLogin());
+         this.passwordEncoder.encode(utilisateurDTO.getPassword());
+         return utilisateur;
+
+     }*/
     @Override
     public PersonnelsDTO getPersonnelById(Long id) {
         Personnels personnel = personnelsRepository.findById(id)
@@ -114,6 +116,4 @@ public class PersonnelImpl implements PersonnelService {
                 personnel.getEtat()
         );
     }
-
-
 }
