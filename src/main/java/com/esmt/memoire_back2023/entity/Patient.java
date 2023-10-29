@@ -37,7 +37,7 @@ public class Patient {
     @Column(name = "adresse", length = 255)
     private String adresse;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "patient_consultation",
             joinColumns = @JoinColumn(name = "idPatient"),
@@ -74,6 +74,9 @@ public class Patient {
         this.email = email;
         this.adresse = adresse;
         this.dossierMedical = dossierMedical;
+    }
+
+    public Patient(Long patientId) {
     }
 
     public Long getIdPatient() {

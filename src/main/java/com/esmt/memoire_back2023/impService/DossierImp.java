@@ -10,6 +10,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class DossierImp implements DossierService {
 
@@ -37,5 +40,21 @@ public class DossierImp implements DossierService {
         dossierMedical.setDescription(dossierDTO.getDescription());
 
         return  dossierMedical;
+    }
+
+    @Override
+    public List<DossierDTO> obtenirTousLesDossiers() {
+        List<DossierMedical> dossiersMedicaux = dossierRepository.findAll();
+
+        // Convertir les entités en DTO
+        List<DossierDTO> dossierDTOs = dossiersMedicaux.stream()
+                .map(dossierMedical -> new DossierDTO(
+                        dossierMedical.getIdDossier(),
+                        dossierMedical.getDateCreation(),
+                        dossierMedical.getDescription()
+                ))
+                .collect(Collectors.toList());
+
+        return dossierDTOs;
     }
 }
