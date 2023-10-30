@@ -11,4 +11,6 @@ public interface PrendreRvService {
 
     PrendreRvDTO getPrendreRvById(Long id);
 
+    void deletePrendreRvService(Long id);
+
 }

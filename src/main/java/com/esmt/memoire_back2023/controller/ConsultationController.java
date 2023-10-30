@@ -6,6 +6,8 @@ import com.esmt.memoire_back2023.services.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/consultation")
@@ -28,4 +30,18 @@ public class ConsultationController {
     public void supprimerConsultation(@PathVariable Long id) {
         consultationService.deleteConsultation(id);
     }
+
+    @GetMapping("/consultations")
+    public List<ConsultationDTO> getAllConsultation()  {
+        return consultationService.getAllConsultations();
+    }
+    @GetMapping(path = "/{id}")
+    public ConsultationDTO getConsultationById(@PathVariable Long id) {
+        return consultationService.getConsultationById(id);
+    }
+
+
+
+
+
 }

@@ -6,6 +6,8 @@ import com.esmt.memoire_back2023.services.HospitalisationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/hospitalisation")
@@ -27,5 +29,15 @@ public class HospitalisationController {
     @DeleteMapping("/{id}")
     public void supprimerHospi(@PathVariable Long id) {
         hospitalisationService.deleteHospi(id);
+    }
+
+    @GetMapping(path = "/all")
+    List<HospitalisationDTO> getAllHospitalisations() {
+        return hospitalisationService.getAllHospitalisations();
+    }
+
+    @GetMapping(path = "/{id}")
+    public HospitalisationDTO getHospitalisationById(@PathVariable Long id) {
+        return hospitalisationService.getHospitalisationById(id);
     }
 }

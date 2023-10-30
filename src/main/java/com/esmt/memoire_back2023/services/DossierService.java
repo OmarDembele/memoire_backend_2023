@@ -10,5 +10,14 @@ public interface DossierService {
     DossierMedical creerDossier(DossierDTO dossierDTO);
 
     List<DossierDTO> obtenirTousLesDossiers();
+
+    DossierMedical updateDossierMedical(Long id, DossierDTO dossierDTO);
+
+    void deleteDossier(Long id);
+
+    DossierDTO  getDossierMedicalById(Long id);
+
+
+
 }
 

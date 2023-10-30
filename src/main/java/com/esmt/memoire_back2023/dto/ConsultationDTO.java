@@ -63,6 +63,24 @@ public class ConsultationDTO {
         this.description = description;
     }
 
+    public ConsultationDTO( Long patientId, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, Long personnelId, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
+        this.id = id;
+        this.patientId = patientId;
+        this.medecinTraitantId = medecinTraitantId;
+        this.medecinConsultantId = medecinConsultantId;
+        this.medecinChirurgienId = medecinChirurgienId;
+        this.antecedentsMedicaux = antecedentsMedicaux;
+        this.anciensTraitements = anciensTraitements;
+        this.personnelId = personnelId;
+        this.antecedent = antecedent;
+        this.ancientraitement = ancientraitement;
+        this.diagnostic = diagnostic;
+        this.description = description;
+        this.dateconsultation = dateconsultation;
+    }
+
+
+
     public Long getId() {
         return id;
     }
@@ -162,8 +180,8 @@ public class ConsultationDTO {
     public String getDateconsultation() {
         return dateconsultation;
     }
-
     public void setDateconsultation(String dateconsultation) {
         this.dateconsultation = dateconsultation;
     }
+
 }

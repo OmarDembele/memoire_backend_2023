@@ -1,6 +1,5 @@
 package com.esmt.memoire_back2023.impService;
 
-import com.esmt.memoire_back2023.dto.DossierDTO;
 import com.esmt.memoire_back2023.dto.PatientDTO;
 import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.Patient;
@@ -57,6 +56,9 @@ public class PatientImpl implements PatientService {
         return patient;
     }
 
+
+
+
     @Override
     public List<PatientDTO> obtenirTousLesPatients() {
         // Récupérer les entités depuis la base de données
@@ -78,5 +80,68 @@ public class PatientImpl implements PatientService {
                 .collect(Collectors.toList());
 
         return patientDTOS;
+    }
+
+    @Override
+    public PatientDTO obtenirPatientParId(Long id) {
+        // Buscar el paciente por su ID
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Patient non trouvé avec l'ID : " + id));
+
+        // Convertir la entidad en un DTO
+        PatientDTO  obtenirPatientParId = new PatientDTO(
+                patient.getIdPatient(),
+                patient.getNom(),
+                patient.getPrenom(),
+                patient.getSexe(),
+                patient.getLieuNaissance(),
+                patient.getDateNaissance(),
+                patient.getAdresse(),
+                patient.getEmail(),
+                patient.getTelephone()
+        );
+
+        // Devolver el DTO del paciente encontrado
+        return  obtenirPatientParId;
+    }
+
+    //update
+    @Override
+    public Patient updatePatient(Long id, PatientDTO patientDTO) {
+        // Buscar el paciente por su ID
+        Patient existingPatient = patientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Patient non trouvé avec l'ID : " + id));
+
+        // Actualizar los campos del paciente con los datos de DTO
+        existingPatient.setNom(patientDTO.getNom());
+        existingPatient.setPrenom(patientDTO.getPrenom());
+        existingPatient.setSexe(patientDTO.getSexe());
+        existingPatient.setLieuNaissance(patientDTO.getLieuNaissance());
+        existingPatient.setDateNaissance(patientDTO.getDateNaissance());
+        existingPatient.setAdresse(patientDTO.getAdresse());
+        existingPatient.setEmail(patientDTO.getEmail());
+        existingPatient.setTelephone(patientDTO.getTelephone());
+
+        // Si el DTO proporciona un ID de DossierMedical, actualiza el DossierMedical asociado.
+        if (patientDTO.getDossierMedicalId() != null) {
+            DossierMedical dossierMedical = dossierMedicalRepository.findById(patientDTO.getDossierMedicalId())
+                    .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + patientDTO.getDossierMedicalId()));
+            existingPatient.setDossierMedical(dossierMedical);
+        }
+
+        // Guardar el paciente actualizado en la base de datos
+        return patientRepository.save(existingPatient);
+    }
+
+
+
+
+
+    @Override
+    public void deletePatient(Long id) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Consultation non trouvé avec l'ID : " + id));
+        patientRepository.delete(patient);
+        dossierMedicalRepository.delete(patient.getDossierMedical());
     }
 }

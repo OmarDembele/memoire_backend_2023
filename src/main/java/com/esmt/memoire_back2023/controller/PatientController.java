@@ -46,4 +46,23 @@ public class PatientController {
         return patientService.obtenirTousLesPatients();
     }
 
+    @DeleteMapping("/{id}")
+    public void supprimerPatient(@PathVariable Long id) {
+        patientService.deletePatient(id);
+    }
+
+    @GetMapping(path = "/{id}")
+    public PatientDTO getPatientById(@PathVariable Long id) {
+        return patientService.obtenirPatientParId(id);
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody PatientDTO patientDTO) {
+        Patient updatedPatient = patientService.updatePatient(id, patientDTO);
+        if (updatedPatient != null) {
+            return ResponseEntity.ok(updatedPatient);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

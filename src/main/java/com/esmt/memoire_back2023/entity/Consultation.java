@@ -155,5 +155,7 @@ public class Consultation {
     public void setDateconsultation(String dateconsultation) {
         this.dateconsultation = dateconsultation;
     }
+
+
 }
 

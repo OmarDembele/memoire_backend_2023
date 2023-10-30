@@ -1,6 +1,5 @@
 package com.esmt.memoire_back2023.impService;
 
-
 import com.esmt.memoire_back2023.dto.ConsultationDTO;
 import com.esmt.memoire_back2023.entity.Consultation;
 import com.esmt.memoire_back2023.entity.Patient;
@@ -12,14 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ConsultationImpl implements ConsultationService {
 
-
     @Autowired
     private ConsultationRepository consultationRepository;
-
 
     @Override
     public Consultation addConsultation(ConsultationDTO consultationDTO) {
@@ -29,9 +28,54 @@ public class ConsultationImpl implements ConsultationService {
     }
 
     @Override
+    public List<ConsultationDTO> getAllConsultations() {
+        List<Consultation> consultations = consultationRepository.findAll();
+
+        return consultations.stream()
+                .map(consultation -> new ConsultationDTO(
+                        consultation.getIdConsultation(),
+                        consultation.getMedecinTraitant().getIdPersonnel(),
+                        consultation.getMedecinConsultant().getIdPersonnel(),
+                        consultation.getMedecinChirurgien().getIdPersonnel(),
+                        consultation.getAntecedent(),
+                        consultation.getAncientraitement(),
+                        consultation.getPatients().stream().findFirst().get().getIdPatient(),
+                        consultation.getAntecedent(),
+                        consultation.getAncientraitement(),
+                        consultation.getDateconsultation(),
+                        consultation.getDiagnostic(),
+                        consultation.getDescription()
+                ))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ConsultationDTO getConsultationById(Long id) {
+        Consultation consultation = consultationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Consultation non trouvée avec l'ID : " + id));
+
+        return new ConsultationDTO(
+                consultation.getIdConsultation(),
+                consultation.getMedecinTraitant().getIdPersonnel(),
+                consultation.getMedecinConsultant().getIdPersonnel(),
+                consultation.getMedecinChirurgien().getIdPersonnel(),
+                consultation.getAntecedent(),
+                consultation.getAncientraitement(),
+                consultation.getPatients().stream().findFirst().get().getIdPatient(),
+                consultation.getAntecedent(),
+                consultation.getAncientraitement(),
+                consultation.getDateconsultation(),
+                consultation.getDiagnostic(),
+                consultation.getDescription()
+        );
+    }
+
+
+
+    @Override
     public void deleteConsultation(Long id) {
         Consultation consultation = consultationRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Consultation non trouvé avec l'ID : " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Consultation non trouvée avec l'ID : " + id));
         consultationRepository.delete(consultation);
     }
 
@@ -51,5 +95,4 @@ public class ConsultationImpl implements ConsultationService {
         consultation.setDateconsultation(consultationDTO.getDateconsultation());
         return consultation;
     }
-
 }
