@@ -44,6 +44,11 @@ public class ConsultationImpl implements ConsultationService {
         consultation.setMedecinTraitant(new Personnels(consultationDTO.getMedecinTraitantId()));
         consultation.setMedecinConsultant(new Personnels(consultationDTO.getMedecinConsultantId()));
         consultation.setMedecinChirurgien(new Personnels(consultationDTO.getMedecinChirurgienId()));
+        consultation.setTaille(consultationDTO.getTaille());
+        consultation.setPoids(consultationDTO.getPoids());
+        consultation.setNameurgence(consultationDTO.getNameurgence());
+        consultation.setAdresse(consultationDTO.getAdresse());
+        consultation.setTelephone(consultationDTO.getTelephone());
         consultation.setDiagnostic(consultationDTO.getDiagnostic());
         consultation.setDescription(consultationDTO.getDescription());
         consultation.setAntecedent(consultationDTO.getAntecedent());

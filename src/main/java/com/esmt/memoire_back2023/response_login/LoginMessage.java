@@ -2,6 +2,8 @@ package com.esmt.memoire_back2023.response_login;
 
 public class LoginMessage {
 
+    private Long id;
+
     private String message;
 
     private Boolean status;
@@ -25,6 +27,21 @@ public class LoginMessage {
     }
 
     public LoginMessage(String message, Boolean status, String role, String token) {
+        this.message = message;
+        this.status = status;
+        this.role = role;
+        this.token = token;
+    }
+
+    public LoginMessage(Long id, String message, Boolean status, String role, String token) {
+        this.id = id;
+        this.message = message;
+        this.status = status;
+        this.role = role;
+    }
+
+    public LoginMessage(Long id, String message, Boolean status, String role) {
+        this.id = id;
         this.message = message;
         this.status = status;
         this.role = role;
@@ -61,6 +78,14 @@ public class LoginMessage {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
 

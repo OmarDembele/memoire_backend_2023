@@ -26,6 +26,16 @@ public class Consultation {
     @JoinColumn(name = "medecin_chirurgien_id")
     private Personnels medecinChirurgien;
 
+    private String poids;
+
+    private String taille;
+
+    private String nameurgence;
+
+    private String adresse;
+
+    private String telephone;
+
     private String antecedent;
 
     private String ancientraitement;
@@ -74,6 +84,24 @@ public class Consultation {
         this.diagnostic = diagnostic;
         this.description = description;
         this.dateconsultation = dateconsultation;
+    }
+
+    public Consultation(Long idConsultation, Set<Patient> patients, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
+        this.idConsultation = idConsultation;
+        this.patients = patients;
+        this.medecinTraitant = medecinTraitant;
+        this.medecinConsultant = medecinConsultant;
+        this.medecinChirurgien = medecinChirurgien;
+        this.poids = poids;
+        this.taille = taille;
+        this.nameurgence = nameurgence;
+        this.adresse = adresse;
+        this.telephone = telephone;
+        this.antecedent = antecedent;
+        this.ancientraitement = ancientraitement;
+        this.dateconsultation = dateconsultation;
+        this.diagnostic = diagnostic;
+        this.description = description;
     }
 
     public Long getIdConsultation() {
@@ -154,6 +182,46 @@ public class Consultation {
 
     public void setDateconsultation(String dateconsultation) {
         this.dateconsultation = dateconsultation;
+    }
+
+    public String getPoids() {
+        return poids;
+    }
+
+    public void setPoids(String poids) {
+        this.poids = poids;
+    }
+
+    public String getTaille() {
+        return taille;
+    }
+
+    public void setTaille(String taille) {
+        this.taille = taille;
+    }
+
+    public String getNameurgence() {
+        return nameurgence;
+    }
+
+    public void setNameurgence(String nameurgence) {
+        this.nameurgence = nameurgence;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }
 

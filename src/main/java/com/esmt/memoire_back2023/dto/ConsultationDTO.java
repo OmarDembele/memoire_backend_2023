@@ -11,10 +11,18 @@ public class ConsultationDTO {
     private String anciensTraitements;
     private Long personnelId;
 
+    private String poids;
+
+    private String taille;
+
+    private String nameurgence;
+
+    private String adresse;
+
+    private String telephone;
     private String antecedent;
 
     private String ancientraitement;
-
     private String dateconsultation;
     private String diagnostic;
     private String description;
@@ -56,6 +64,27 @@ public class ConsultationDTO {
         this.antecedentsMedicaux = antecedentsMedicaux;
         this.anciensTraitements = anciensTraitements;
         this.personnelId = personnelId;
+        this.antecedent = antecedent;
+        this.ancientraitement = ancientraitement;
+        this.dateconsultation = dateconsultation;
+        this.diagnostic = diagnostic;
+        this.description = description;
+    }
+
+    public ConsultationDTO(Long id, Long patientId, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, Long personnelId, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
+        this.id = id;
+        this.patientId = patientId;
+        this.medecinTraitantId = medecinTraitantId;
+        this.medecinConsultantId = medecinConsultantId;
+        this.medecinChirurgienId = medecinChirurgienId;
+        this.antecedentsMedicaux = antecedentsMedicaux;
+        this.anciensTraitements = anciensTraitements;
+        this.personnelId = personnelId;
+        this.poids = poids;
+        this.taille = taille;
+        this.nameurgence = nameurgence;
+        this.adresse = adresse;
+        this.telephone = telephone;
         this.antecedent = antecedent;
         this.ancientraitement = ancientraitement;
         this.dateconsultation = dateconsultation;
@@ -165,5 +194,45 @@ public class ConsultationDTO {
 
     public void setDateconsultation(String dateconsultation) {
         this.dateconsultation = dateconsultation;
+    }
+
+    public String getPoids() {
+        return poids;
+    }
+
+    public void setPoids(String poids) {
+        this.poids = poids;
+    }
+
+    public String getTaille() {
+        return taille;
+    }
+
+    public void setTaille(String taille) {
+        this.taille = taille;
+    }
+
+    public String getNameurgence() {
+        return nameurgence;
+    }
+
+    public void setNameurgence(String nameurgence) {
+        this.nameurgence = nameurgence;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }

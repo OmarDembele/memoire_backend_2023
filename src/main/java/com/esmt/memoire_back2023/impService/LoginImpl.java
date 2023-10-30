@@ -50,7 +50,7 @@ public class LoginImpl implements LoginService {
                 Optional<Admin> admin = adminRepository.findOneByLoginAndPassword(loginDTO.getLogin(), encodedPassword);
 
                 if(admin.isPresent()){
-                    return new LoginMessage("Login Success", true, role);
+                    return new LoginMessage(admin1.getIdAdmin(),"Login Success", true, role);
                 }
                 else{
                     return new LoginMessage("Login Failed", false, role);
@@ -68,7 +68,7 @@ public class LoginImpl implements LoginService {
             if(isPwdRight){
                 Optional<Personnels> personnel = personnelsRepository.findOneByLoginAndPassword(loginDTO.getLogin(), encodedPassword);
                 if(personnel.isPresent()){
-                    return new LoginMessage("Login Success", true, role, token);
+                    return new LoginMessage( personnels.getIdPersonnel(), "Login Success", true, role, token);
                 }
                 else{
                     return new LoginMessage("Login Failed", false, role);
