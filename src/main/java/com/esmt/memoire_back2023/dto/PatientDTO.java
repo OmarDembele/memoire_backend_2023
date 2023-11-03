@@ -1,6 +1,8 @@
 package com.esmt.memoire_back2023.dto;
 
 import com.esmt.memoire_back2023.entity.DossierMedical;
+import com.esmt.memoire_back2023.entity.Personnels;
+import jakarta.persistence.Column;
 
 public class PatientDTO {
 
@@ -22,9 +24,15 @@ public class PatientDTO {
 
     private String adresse;
 
+    private String profession;
+
+    private String groupe_sanguin;
+
     private Long dossierMedicalId;
 
     private DossierMedical dossierMedical;
+
+    private Long personnel_id;
 
     public PatientDTO() {
     }
@@ -65,6 +73,23 @@ public class PatientDTO {
         this.email = email;
         this.adresse = adresse;
         this.dossierMedical = dossierMedical;
+    }
+
+    public PatientDTO(Long id, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, String profession, String groupe_sanguin, Long dossierMedicalId, DossierMedical dossierMedical, Long personnel_id) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sexe = sexe;
+        this.dateNaissance = dateNaissance;
+        this.lieuNaissance = lieuNaissance;
+        this.telephone = telephone;
+        this.email = email;
+        this.adresse = adresse;
+        this.profession = profession;
+        this.groupe_sanguin = groupe_sanguin;
+        this.dossierMedicalId = dossierMedicalId;
+        this.dossierMedical = dossierMedical;
+        this.personnel_id = personnel_id;
     }
 
     public Long getId() {
@@ -153,5 +178,29 @@ public class PatientDTO {
 
     public void setDossierMedical(DossierMedical dossierMedical) {
         this.dossierMedical = dossierMedical;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getGroupe_sanguin() {
+        return groupe_sanguin;
+    }
+
+    public void setGroupe_sanguin(String groupe_sanguin) {
+        this.groupe_sanguin = groupe_sanguin;
+    }
+
+    public Long getPersonnel_id() {
+        return personnel_id;
+    }
+
+    public void setPersonnel_id(Long personnel_id) {
+        this.personnel_id = personnel_id;
     }
 }

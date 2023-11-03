@@ -2,9 +2,12 @@ package com.esmt.memoire_back2023.controller;
 
 import com.esmt.memoire_back2023.dto.HospitalisationDTO;
 import com.esmt.memoire_back2023.entity.Hospitalisation;
+import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.services.HospitalisationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -27,5 +30,10 @@ public class HospitalisationController {
     @DeleteMapping("/{id}")
     public void supprimerHospi(@PathVariable Long id) {
         hospitalisationService.deleteHospi(id);
+    }
+
+    @GetMapping("")
+    public List<Hospitalisation> getAllHospitalisation() {
+        return hospitalisationService.getAllHospi();
     }
 }

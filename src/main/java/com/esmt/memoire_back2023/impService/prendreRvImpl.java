@@ -45,8 +45,6 @@ public class prendreRvImpl implements PrendreRvService {
         prendreRv.setEmail(prendreRvDTO.getEmail());
         prendreRv.setTelephone(prendreRvDTO.getTelephone());
         prendreRv.setProfession(prendreRvDTO.getProfession());
-        prendreRv.setHeureRv(prendreRvDTO.getHeureRv());
-        prendreRv.setDateRv(prendreRvDTO.getDateRv());
         return  prendreRv;
     }
 }

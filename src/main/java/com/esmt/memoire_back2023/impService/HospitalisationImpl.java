@@ -4,17 +4,23 @@ import com.esmt.memoire_back2023.dto.HospitalisationDTO;
 import com.esmt.memoire_back2023.entity.Consultation;
 import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.Hospitalisation;
+import com.esmt.memoire_back2023.repository.DossierRepository;
 import com.esmt.memoire_back2023.repository.HospitalisationRepository;
 import com.esmt.memoire_back2023.services.HospitalisationService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HospitalisationImpl implements HospitalisationService {
 
     @Autowired
     private HospitalisationRepository hospitalisationRepository;
+
+    @Autowired
+    private DossierRepository dossierRepository;
 
 
     @Override
@@ -31,6 +37,11 @@ public class HospitalisationImpl implements HospitalisationService {
         hospitalisationRepository.delete(hospitalisation);
     }
 
+    @Override
+    public List<Hospitalisation> getAllHospi() {
+        return hospitalisationRepository.findAll();
+    }
+
     private Hospitalisation convertDTOToEntity(HospitalisationDTO hospitalisationDTO){
         Hospitalisation hospitalisation = new Hospitalisation();
 
@@ -41,10 +52,25 @@ public class HospitalisationImpl implements HospitalisationService {
         hospitalisation.setLit(hospitalisationDTO.getLit());
 
         if (hospitalisationDTO.getDossierMedical_id() != null) {
-            Hospitalisation hospitalisation1 = hospitalisationRepository.findById(hospitalisationDTO.getDossierMedical_id())
+            DossierMedical dossierMedical = dossierRepository.findById(hospitalisationDTO.getDossierMedical_id())
                     .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + hospitalisationDTO.getDossierMedical_id()));
-            hospitalisation.setDossierMedical_id(hospitalisation1.getDossierMedical_id());
+            hospitalisation.setDossierMedical_id(dossierMedical);
         }
         return hospitalisation;
     }
 }
+
+
+
+/*
+if (hospitalisationDTO.getDossierMedical_id() != null) {
+            Long dossierMedicalId = hospitalisationDTO.getDossierMedical_id();
+            Optional<DossierMedical> dossierMedicalOptional = dossierRepository.findById(dossierMedicalId);
+
+            if (dossierMedicalOptional.isPresent()) {
+                DossierMedical dossierMedical = dossierMedicalOptional.get();
+                hospitalisation.setDossierMedical_id(dossierMedical);
+            } else {
+                throw new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + dossierMedicalId);
+            }
+ */

@@ -37,6 +37,12 @@ public class Patient {
     @Column(name = "adresse", length = 255)
     private String adresse;
 
+    @Column(name = "profession", length = 255)
+    private String profession;
+
+    @Column(name = "groupe_sanguin", length = 255)
+    private String groupe_sanguin;
+
     @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "patient_consultation",
@@ -47,6 +53,9 @@ public class Patient {
 
     @OneToOne(cascade = CascadeType.ALL)
     private DossierMedical dossierMedical;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Personnels personnel_id;
 
     public Patient() {
     }
@@ -74,6 +83,23 @@ public class Patient {
         this.email = email;
         this.adresse = adresse;
         this.dossierMedical = dossierMedical;
+    }
+
+    public Patient(Long idPatient, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, String profession, String groupe_sanguin, Set<Consultation> consultations, DossierMedical dossierMedical, Personnels personnel_id) {
+        this.idPatient = idPatient;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.sexe = sexe;
+        this.dateNaissance = dateNaissance;
+        this.lieuNaissance = lieuNaissance;
+        this.telephone = telephone;
+        this.email = email;
+        this.adresse = adresse;
+        this.profession = profession;
+        this.groupe_sanguin = groupe_sanguin;
+        this.consultations = consultations;
+        this.dossierMedical = dossierMedical;
+        this.personnel_id = personnel_id;
     }
 
     public Patient(Long patientId) {
@@ -161,5 +187,33 @@ public class Patient {
 
     public Set<Consultation> getConsultations() {
         return consultations;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getGroupe_sanguin() {
+        return groupe_sanguin;
+    }
+
+    public void setGroupe_sanguin(String groupe_sanguin) {
+        this.groupe_sanguin = groupe_sanguin;
+    }
+
+    public void setConsultations(Set<Consultation> consultations) {
+        this.consultations = consultations;
+    }
+
+    public Personnels getPersonnel_id() {
+        return personnel_id;
+    }
+
+    public void setPersonnel_id(Personnels personnel_id) {
+        this.personnel_id = personnel_id;
     }
 }

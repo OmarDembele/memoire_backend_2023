@@ -14,7 +14,7 @@ public class NextRv {
     @Column(name = "dossier_id", length = 45)
     private Long dossierid;
 
-    @Column(name = "medecin_", length = 45)
+    @Column(name = "medecin_assigne", length = 45)
     private String medecinassigne;
 
     @Column(name = "heure_rv", length = 45)

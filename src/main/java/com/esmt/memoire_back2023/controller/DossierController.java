@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -27,9 +28,15 @@ public class DossierController {
         return dossierMedical;
     }
 
-    @GetMapping(path = "/dossiers")
+    @GetMapping()
     public List<DossierDTO> getAllDossiers() {
         return dossierService.obtenirTousLesDossiers();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<DossierMedical> getDossierById(@PathVariable Long id) {
+        Optional<DossierMedical> dossierMedical = dossierService.getDossierById(id);
+        return dossierMedical;
     }
 
 }

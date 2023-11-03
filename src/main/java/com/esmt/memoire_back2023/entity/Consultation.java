@@ -11,6 +11,10 @@ public class Consultation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConsultation;
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private DossierMedical dossierMedical_id;
+
     @ManyToMany(mappedBy = "consultations", cascade = CascadeType.REMOVE)
     private Set<Patient> patients = new HashSet<>();
 
@@ -86,9 +90,10 @@ public class Consultation {
         this.dateconsultation = dateconsultation;
     }
 
-    public Consultation(Long idConsultation, Set<Patient> patients, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
+    public Consultation(Long idConsultation, Set<Patient> patients, DossierMedical dossierMedical_id, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
         this.idConsultation = idConsultation;
         this.patients = patients;
+        this.dossierMedical_id = dossierMedical_id;
         this.medecinTraitant = medecinTraitant;
         this.medecinConsultant = medecinConsultant;
         this.medecinChirurgien = medecinChirurgien;
@@ -110,6 +115,14 @@ public class Consultation {
 
     public void setIdConsultation(Long idConsultation) {
         this.idConsultation = idConsultation;
+    }
+
+    public DossierMedical getDossierMedical_id() {
+        return dossierMedical_id;
+    }
+
+    public void setDossierMedical_id(DossierMedical dossierMedical_id) {
+        this.dossierMedical_id = dossierMedical_id;
     }
 
     public Set<Patient> getPatients() {

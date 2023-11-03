@@ -4,6 +4,7 @@ import com.esmt.memoire_back2023.dto.ExamenDTO;
 import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.ExamenMedical;
 import com.esmt.memoire_back2023.entity.Hospitalisation;
+import com.esmt.memoire_back2023.repository.DossierRepository;
 import com.esmt.memoire_back2023.repository.ExamenRepository;
 import com.esmt.memoire_back2023.services.ExamenService;
 import jakarta.persistence.EntityNotFoundException;
@@ -15,6 +16,9 @@ public class ExamenImpl implements ExamenService {
 
     @Autowired
     private ExamenRepository examenRepository;
+
+    @Autowired
+    private DossierRepository dossierRepository;
 
     @Override
     public ExamenMedical creerExamen(ExamenDTO examenDTO) {
@@ -37,9 +41,9 @@ public class ExamenImpl implements ExamenService {
         examenMedical.setResultat(examenDTO.getResultat());
 
         if (examenDTO.getDossierMedical_id() != null) {
-            ExamenMedical examenMedical1 = examenRepository.findById(examenDTO.getDossierMedical_id())
+            DossierMedical examenMedical1 = dossierRepository.findById(examenDTO.getDossierMedical_id())
                     .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + examenDTO.getDossierMedical_id()));
-            examenMedical.setDossierMedical_id(examenMedical1.getDossierMedical_id());
+            examenMedical.setDossierMedical_id(examenMedical1);
         }
         return examenMedical;
     }

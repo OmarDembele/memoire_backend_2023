@@ -1,5 +1,6 @@
 package com.esmt.memoire_back2023.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,7 +8,7 @@ import jakarta.persistence.*;
 public class Hospitalisation {
 
     @Id
-    @Column(name = "idConsultation", length = 45)
+    @Column(name = "idHospitalisation", length = 45)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -21,7 +22,9 @@ public class Hospitalisation {
 
     private String lit;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "dossierMedical_id")
+    @JsonIgnore
     private DossierMedical dossierMedical_id;
 
     public Hospitalisation() {

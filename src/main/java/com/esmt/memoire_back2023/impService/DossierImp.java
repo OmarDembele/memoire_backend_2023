@@ -2,15 +2,13 @@ package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.DossierDTO;
 import com.esmt.memoire_back2023.entity.DossierMedical;
-import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.repository.DossierRepository;
-import com.esmt.memoire_back2023.repository.PatientRepository;
 import com.esmt.memoire_back2023.services.DossierService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,12 +17,8 @@ public class DossierImp implements DossierService {
     @Autowired
     private DossierRepository dossierRepository;
 
-    @Autowired
-    private PatientRepository patientRepository;
-
-    public DossierImp(DossierRepository dossierRepository, PatientRepository patientRepository) {
+    public DossierImp(DossierRepository dossierRepository) {
         this.dossierRepository = dossierRepository;
-        this.patientRepository = patientRepository;
     }
 
     @Override
@@ -36,6 +30,7 @@ public class DossierImp implements DossierService {
 
     private DossierMedical convertDTOToEntity(DossierDTO dossierDTO){
         DossierMedical dossierMedical = new DossierMedical();
+        dossierMedical.setNumero_dossier(dossierDTO.getNumero_dossier());
         dossierMedical.setDateCreation(dossierDTO.getDateCreation());
         dossierMedical.setDescription(dossierDTO.getDescription());
 
@@ -50,11 +45,18 @@ public class DossierImp implements DossierService {
         List<DossierDTO> dossierDTOs = dossiersMedicaux.stream()
                 .map(dossierMedical -> new DossierDTO(
                         dossierMedical.getIdDossier(),
+                        dossierMedical.getNumero_dossier(),
                         dossierMedical.getDateCreation(),
                         dossierMedical.getDescription()
                 ))
                 .collect(Collectors.toList());
 
         return dossierDTOs;
+    }
+
+    @Override
+    public Optional<DossierMedical> getDossierById(Long id) {
+        Optional<DossierMedical> dossierMedical = dossierRepository.findById(id);
+        return dossierMedical;
     }
 }

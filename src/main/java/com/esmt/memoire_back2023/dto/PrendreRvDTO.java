@@ -22,14 +22,11 @@ public class PrendreRvDTO {
 
     private String profession;
 
-    private String heureRv;
-
-    private String dateRv;
 
     public PrendreRvDTO() {
     }
 
-    public PrendreRvDTO(Long id, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, String profession, String heureRv, String dateRv) {
+    public PrendreRvDTO(Long id, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, String profession) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -40,8 +37,6 @@ public class PrendreRvDTO {
         this.email = email;
         this.adresse = adresse;
         this.profession = profession;
-        this.heureRv = heureRv;
-        this.dateRv = dateRv;
     }
 
     public Long getId() {
@@ -124,19 +119,4 @@ public class PrendreRvDTO {
         this.profession = profession;
     }
 
-    public String getHeureRv() {
-        return heureRv;
-    }
-
-    public void setHeureRv(String heureRv) {
-        this.heureRv = heureRv;
-    }
-
-    public String getDateRv() {
-        return dateRv;
-    }
-
-    public void setDateRv(String dateRv) {
-        this.dateRv = dateRv;
-    }
 }

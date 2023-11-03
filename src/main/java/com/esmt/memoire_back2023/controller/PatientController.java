@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/patient")
@@ -34,9 +36,14 @@ public class PatientController {
 
 
     @PostMapping(path = "/save")
-    public Long addPatient(@RequestBody PatientDTO patientDTO) {
+    public Patient addPatient(@RequestBody PatientDTO patientDTO) {
         Patient patient = patientService.creerPatients(patientDTO);
-        return new ResponseEntity<>(patient.getIdPatient(), HttpStatus.CREATED).getBody();
+        return new ResponseEntity<>(patient, HttpStatus.CREATED).getBody();
+    }
+
+    @GetMapping("")
+    public List<Patient> getPatientsByPersonnelId() {
+        return patientService.getPatients();
     }
 
     @DeleteMapping("/{id}")
