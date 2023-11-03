@@ -9,7 +9,6 @@ import com.esmt.memoire_back2023.services.ConsultationService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 
 @Service
@@ -21,7 +20,6 @@ public class ConsultationImpl implements ConsultationService {
 
     @Autowired
     private DossierRepository dossierRepository;
-
 
     @Override
     public Consultation addConsultation(ConsultationDTO consultationDTO) {
