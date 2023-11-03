@@ -43,6 +43,8 @@ public class DossierMedical {
         this.hospitalisations = hospitalisations;
     }
 
+
+
     public Long getIdDossier() {
         return IdDossier;
     }

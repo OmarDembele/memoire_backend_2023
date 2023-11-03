@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -46,8 +49,24 @@ public class PatientController {
         return patientService.getPatients();
     }
 
+
     @DeleteMapping("/{id}")
     public void supprimerPatient(@PathVariable Long id) {
         patientService.deletePatient(id);
+    }
+
+    @GetMapping(path = "/{id}")
+    public PatientDTO getPatientById(@PathVariable Long id) {
+        return patientService.obtenirPatientParId(id);
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody PatientDTO patientDTO) {
+        Patient updatedPatient = patientService.updatePatient(id, patientDTO);
+        if (updatedPatient != null) {
+            return ResponseEntity.ok(updatedPatient);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

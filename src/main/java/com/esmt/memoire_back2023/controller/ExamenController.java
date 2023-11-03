@@ -29,4 +29,11 @@ public class ExamenController {
     public void supprimerExam(@PathVariable Long id) {
         examenService.delleteExam(id);
     }
+
+    @GetMapping(path = "/{id}")
+    public ExamenDTO getExamenById(@PathVariable Long id) {
+        return examenService.getExamenMedicalById(id);
+    }
+
+
 }

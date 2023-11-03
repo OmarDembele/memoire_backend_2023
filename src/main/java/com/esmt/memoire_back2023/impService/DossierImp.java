@@ -4,6 +4,7 @@ import com.esmt.memoire_back2023.dto.DossierDTO;
 import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.repository.DossierRepository;
 import com.esmt.memoire_back2023.services.DossierService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,4 +60,31 @@ public class DossierImp implements DossierService {
         Optional<DossierMedical> dossierMedical = dossierRepository.findById(id);
         return dossierMedical;
     }
+    @Override
+    public DossierMedical updateDossierMedical(Long id, DossierDTO dossierDTO) {
+        DossierMedical dossierToUpdate = convertDTOToEntity(dossierDTO);
+
+        Optional<DossierMedical> existingDossier = dossierRepository.findById(id);
+        if (!existingDossier.isPresent()) {
+            throw new EntityNotFoundException("Dossier médical non trouvé avec l'ID : " + id);
+        }
+        DossierMedical updatedDossier = existingDossier.get();
+
+        updatedDossier.setDateCreation(dossierToUpdate.getDateCreation());
+        updatedDossier.setDescription(dossierToUpdate.getDescription());
+
+        // Enregistrez la mise à jour dans la base de données
+        updatedDossier = dossierRepository.save(updatedDossier);
+
+        return updatedDossier;
+    }
+
+    @Override
+    public void deleteDossier(Long id) {
+        DossierMedical dossierMedical = dossierRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("DossierMedical not found"));
+        dossierRepository.delete(dossierMedical);
+    }
+
+
+
 }

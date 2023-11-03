@@ -33,6 +33,7 @@ public class DossierController {
         return dossierService.obtenirTousLesDossiers();
     }
 
+
     @GetMapping("/{id}")
     public Optional<DossierMedical> getDossierById(@PathVariable Long id) {
         Optional<DossierMedical> dossierMedical = dossierService.getDossierById(id);

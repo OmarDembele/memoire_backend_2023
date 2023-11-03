@@ -1,5 +1,6 @@
 package com.esmt.memoire_back2023.controller;
 
+
 import com.esmt.memoire_back2023.dto.PersonnelsDTO;
 import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.entity.UserRole;
@@ -7,6 +8,7 @@ import com.esmt.memoire_back2023.services.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -26,6 +28,15 @@ public class PersonnelsController {
     public Personnels addPersonnel(@RequestBody PersonnelsDTO personnelsDTO) {
         Personnels personnels = personnelService.creerPersonnels(personnelsDTO);
         return personnels;
+    }
+    @GetMapping(path = "/list")
+    public List<PersonnelsDTO> getAllPersonnels() {
+        return personnelService.getallPersonnels();
+    }
+
+    @GetMapping(path = "/{id}")
+    public PersonnelsDTO getPersonnelById(@PathVariable Long id) {
+        return personnelService.getPersonnelById(id);
     }
 
     @DeleteMapping("/{id}")
@@ -48,4 +59,5 @@ public class PersonnelsController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }

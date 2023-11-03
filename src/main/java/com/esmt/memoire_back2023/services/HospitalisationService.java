@@ -6,6 +6,8 @@ import com.esmt.memoire_back2023.entity.Patient;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface HospitalisationService {
 
     Hospitalisation creerHospi(HospitalisationDTO hospitalisationDTO);
@@ -13,4 +15,8 @@ public interface HospitalisationService {
     void deleteHospi(Long id);
 
     List<Hospitalisation> getAllHospi();
+
+    HospitalisationDTO getHospitalisationById(Long id);
+
+
 }

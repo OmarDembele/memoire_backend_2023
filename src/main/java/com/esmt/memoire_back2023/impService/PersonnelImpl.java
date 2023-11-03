@@ -1,7 +1,6 @@
 package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.PersonnelsDTO;
-import com.esmt.memoire_back2023.entity.Admin;
 import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.entity.UserRole;
 import com.esmt.memoire_back2023.repository.PersonnelsRepository;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonnelImpl implements PersonnelService {
@@ -30,12 +30,7 @@ public class PersonnelImpl implements PersonnelService {
         return personnels;
     }
 
-    @Override
-    public void deletePersonnel(Long id) {
-        Personnels personnels = personnelsRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Admin non trouvé avec l'ID : " + id));
-        personnelsRepository.delete(personnels);
-    }
+
 
     private Personnels convertDTOToEntity(PersonnelsDTO personnelsDTO) {
 
@@ -54,6 +49,61 @@ public class PersonnelImpl implements PersonnelService {
         personnels.setPassword(this.passwordEncoder.encode(personnelsDTO.getPassword()));
         return personnels;
 
+    }
+
+    public List<PersonnelsDTO> getallPersonnels() {
+        List<Personnels> personnels = personnelsRepository.findAll();
+
+        //convertir la liste des personnels en liste de personnelsDTO
+        List<PersonnelsDTO> personnelsDTOs = personnels.stream()
+                .map(personnel -> new PersonnelsDTO(
+                        personnel.getIdPersonnel(),
+                        personnel.getNom(),
+                        personnel.getPrenom(),
+                        personnel.getSexe(),
+                        personnel.getLieuNaissance(),
+                        personnel.getNumLicence(),
+                        personnel.getLogin(),
+                        personnel.getPassword(),
+                        personnel.getType(),
+                        personnel.getStatus(),
+                        personnel.getRole(),
+                        personnel.getSpecialite(),
+                        personnel.getEtat()
+                ))
+                .collect(Collectors.toList());
+
+        return personnelsDTOs;
+
+
+    }
+
+    @Override
+    public PersonnelsDTO getPersonnelById(Long id) {
+        Personnels personnel = personnelsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Personnel non trouvé avec l'ID : " + id));
+
+        return new PersonnelsDTO(
+                personnel.getIdPersonnel(),
+                personnel.getNom(),
+                personnel.getPrenom(),
+                personnel.getSexe(),
+                personnel.getLieuNaissance(),
+                personnel.getNumLicence(),
+                personnel.getLogin(),
+                personnel.getPassword(),
+                personnel.getType(),
+                personnel.getStatus(),
+                personnel.getRole(),
+                personnel.getSpecialite(),
+                personnel.getEtat()
+        );
+    }
+    @Override
+    public void deletePersonnel(Long id) {
+        Personnels personnels = personnelsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Admin non trouvé avec l'ID : " + id));
+        personnelsRepository.delete(personnels);
     }
 
     @Override
@@ -91,6 +141,5 @@ public class PersonnelImpl implements PersonnelService {
 
         return updatedPersonnels;
     }
-
 
 }

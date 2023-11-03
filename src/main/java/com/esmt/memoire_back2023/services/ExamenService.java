@@ -7,5 +7,10 @@ public interface ExamenService {
 
     ExamenMedical creerExamen(ExamenDTO examenDTO);
 
+    ExamenDTO getExamenMedicalById(Long id);
+
     void delleteExam(Long id);
+
+
+
 }

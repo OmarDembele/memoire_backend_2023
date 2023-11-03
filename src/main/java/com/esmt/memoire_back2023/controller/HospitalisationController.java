@@ -2,7 +2,6 @@ package com.esmt.memoire_back2023.controller;
 
 import com.esmt.memoire_back2023.dto.HospitalisationDTO;
 import com.esmt.memoire_back2023.entity.Hospitalisation;
-import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.services.HospitalisationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +34,6 @@ public class HospitalisationController {
     @GetMapping("")
     public List<Hospitalisation> getAllHospitalisation() {
         return hospitalisationService.getAllHospi();
+
     }
 }

@@ -85,17 +85,13 @@ public class ConsultationDTO {
         this.antecedentsMedicaux = antecedentsMedicaux;
         this.anciensTraitements = anciensTraitements;
         this.personnelId = personnelId;
-        this.poids = poids;
-        this.taille = taille;
-        this.nameurgence = nameurgence;
-        this.adresse = adresse;
-        this.telephone = telephone;
         this.antecedent = antecedent;
         this.ancientraitement = ancientraitement;
-        this.dateconsultation = dateconsultation;
         this.diagnostic = diagnostic;
         this.description = description;
+        this.dateconsultation = dateconsultation;
     }
+
 
     public Long getId() {
         return id;
@@ -204,7 +200,6 @@ public class ConsultationDTO {
     public String getDateconsultation() {
         return dateconsultation;
     }
-
     public void setDateconsultation(String dateconsultation) {
         this.dateconsultation = dateconsultation;
     }

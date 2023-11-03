@@ -6,6 +6,8 @@ import com.esmt.memoire_back2023.services.PrendreRvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/prendrerv")
@@ -22,6 +24,15 @@ public class PrendreRvController {
     public PrendreRv prendreRv(@RequestBody PrendreRvDTO prendreRvDTO) {
         PrendreRv prendreRv = prendreRvService.prendreRv(prendreRvDTO);
         return prendreRv;
+    }
+
+    @GetMapping(path = "/list")
+    public List<PrendreRvDTO> getAllPrendreRv() {
+        return prendreRvService.getallPrendreRv();
+    }
+    @GetMapping(path = "/{id}")
+    public PrendreRvDTO getPrendreRvById(@PathVariable Long id) {
+        return prendreRvService.getPrendreRvById(id);
     }
 
     @DeleteMapping("/{id}")

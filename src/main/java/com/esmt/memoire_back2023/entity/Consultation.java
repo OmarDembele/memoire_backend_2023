@@ -236,5 +236,6 @@ public class Consultation {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
 }
 

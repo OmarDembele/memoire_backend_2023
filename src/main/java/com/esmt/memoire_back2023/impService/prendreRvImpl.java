@@ -1,5 +1,6 @@
 package com.esmt.memoire_back2023.impService;
 
+import com.esmt.memoire_back2023.dto.PersonnelsDTO;
 import com.esmt.memoire_back2023.dto.PrendreRvDTO;
 import com.esmt.memoire_back2023.entity.Consultation;
 import com.esmt.memoire_back2023.entity.PrendreRv;
@@ -8,6 +9,9 @@ import com.esmt.memoire_back2023.services.PrendreRvService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class prendreRvImpl implements PrendreRvService {
@@ -25,6 +29,16 @@ public class prendreRvImpl implements PrendreRvService {
         PrendreRv prendreRv = convertDTOToEntity(prendreRvDTO);
         prendreRvRepository.save(prendreRv);
         return prendreRv;
+    }
+
+    @Override
+    public List<PrendreRvDTO> getallPrendreRv() {
+        return null;
+    }
+
+    @Override
+    public PrendreRvDTO getPrendreRvById(Long id) {
+        return null;
     }
 
     @Override
@@ -47,4 +61,5 @@ public class prendreRvImpl implements PrendreRvService {
         prendreRv.setProfession(prendreRvDTO.getProfession());
         return  prendreRv;
     }
+
 }

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class PatientImpl implements PatientService {
 
     @Autowired
@@ -38,9 +37,14 @@ public class PatientImpl implements PatientService {
     public Patient creerPatients(PatientDTO patientDTO) {
         Patient patient = convertDTOToEntity(patientDTO);
         patientRepository.save(patient);
-
         return patient;
     }
+
+    @Override
+    public List<PatientDTO> obtenirTousLesPatients() {
+        return null;
+    }
+
 
     @Override
     public void deletePatient(Long id) {
@@ -84,8 +88,60 @@ public class PatientImpl implements PatientService {
                     .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + patientDTO.getDossierMedicalId()));
             patient.setDossierMedical(dossierMedical1);
         } else {
-            patient.setDossierMedical(patientDTO.getDossierMedical());
+
         }
-        return  patient;
+        return patient;
     }
+
+    @Override
+    public PatientDTO obtenirPatientParId(Long id) {
+        // Buscar el paciente por su ID
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Patient non trouvé avec l'ID : " + id));
+
+        // Convertir la entidad en un DTO
+        PatientDTO  obtenirPatientParId = new PatientDTO(
+                patient.getIdPatient(),
+                patient.getNom(),
+                patient.getPrenom(),
+                patient.getSexe(),
+                patient.getLieuNaissance(),
+                patient.getDateNaissance(),
+                patient.getAdresse(),
+                patient.getEmail(),
+                patient.getTelephone()
+        );
+
+        // Devolver el DTO del paciente encontrado
+        return  obtenirPatientParId;
+    }
+
+    //update
+    @Override
+    public Patient updatePatient(Long id, PatientDTO patientDTO) {
+        // Buscar el paciente por su ID
+        Patient existingPatient = patientRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Patient non trouvé avec l'ID : " + id));
+
+        // Actualizar los campos del paciente con los datos de DTO
+        existingPatient.setNom(patientDTO.getNom());
+        existingPatient.setPrenom(patientDTO.getPrenom());
+        existingPatient.setSexe(patientDTO.getSexe());
+        existingPatient.setLieuNaissance(patientDTO.getLieuNaissance());
+        existingPatient.setDateNaissance(patientDTO.getDateNaissance());
+        existingPatient.setAdresse(patientDTO.getAdresse());
+        existingPatient.setEmail(patientDTO.getEmail());
+        existingPatient.setTelephone(patientDTO.getTelephone());
+
+        // Si el DTO proporciona un ID de DossierMedical, actualiza el DossierMedical asociado.
+        if (patientDTO.getDossierMedicalId() != null) {
+            DossierMedical dossierMedical = dossierMedicalRepository.findById(patientDTO.getDossierMedicalId())
+                    .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + patientDTO.getDossierMedicalId()));
+            existingPatient.setDossierMedical(dossierMedical);
+        }
+
+        // Guardar el paciente actualizado en la base de datos
+        return patientRepository.save(existingPatient);
+    }
+
 }
