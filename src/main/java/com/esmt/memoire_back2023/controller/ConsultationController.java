@@ -31,12 +31,14 @@ public class ConsultationController {
         consultationService.deleteConsultation(id);
     }
 
+
     @GetMapping("/consultations")
-    public List<ConsultationDTO> getAllConsultation()  {
+    public List<Consultation> getAllConsultation()  {
         return consultationService.getAllConsultations();
     }
+
     @GetMapping(path = "/{id}")
-    public ConsultationDTO getConsultationById(@PathVariable Long id) {
+    public Consultation getConsultationById(@PathVariable Long id) {
         return consultationService.getConsultationById(id);
     }
 

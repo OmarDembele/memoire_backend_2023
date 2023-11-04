@@ -1,19 +1,15 @@
 package com.esmt.memoire_back2023.controller;
 
 import com.esmt.memoire_back2023.dto.PatientDTO;
-import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.repository.DossierRepository;
 import com.esmt.memoire_back2023.repository.PatientRepository;
 import com.esmt.memoire_back2023.services.PatientService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
 
 import java.util.List;
 
@@ -56,7 +52,7 @@ public class PatientController {
     }
 
     @GetMapping(path = "/{id}")
-    public PatientDTO getPatientById(@PathVariable Long id) {
+    public Patient getPatientById(@PathVariable Long id) {
         return patientService.obtenirPatientParId(id);
     }
 

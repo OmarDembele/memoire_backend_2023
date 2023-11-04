@@ -8,9 +8,9 @@ import java.util.List;
 public interface ConsultationService {
     Consultation addConsultation(ConsultationDTO consultationDTO);
 
-    List<ConsultationDTO> getAllConsultations();
+    List<Consultation> getAllConsultations();
 
-    ConsultationDTO getConsultationById(Long id);
+    Consultation getConsultationById(Long id);
 
     void deleteConsultation(Long id);
 

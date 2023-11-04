@@ -1,5 +1,6 @@
 package com.esmt.memoire_back2023.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,8 +16,10 @@ public class ExamenMedical {
 
     private String resultat;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private DossierMedical dossierMedical_id;
+    @ManyToOne
+    @JoinColumn(name = "dossier_medical_id")
+    @JsonIgnore
+    private DossierMedical dossier_medical_id;
 
     public ExamenMedical() {
     }
@@ -31,7 +34,7 @@ public class ExamenMedical {
         this.id = id;
         this.type = type;
         this.resultat = resultat;
-        this.dossierMedical_id = dossierMedical_id;
+        this.dossier_medical_id = dossierMedical_id;
     }
 
     public Long getId() {
@@ -59,10 +62,10 @@ public class ExamenMedical {
     }
 
     public DossierMedical getDossierMedical_id() {
-        return dossierMedical_id;
+        return dossier_medical_id;
     }
 
     public void setDossierMedical_id(DossierMedical dossierMedical_id) {
-        this.dossierMedical_id = dossierMedical_id;
+        this.dossier_medical_id = dossierMedical_id;
     }
 }

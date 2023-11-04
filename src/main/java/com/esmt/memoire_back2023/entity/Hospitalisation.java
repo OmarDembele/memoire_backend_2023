@@ -2,6 +2,8 @@ package com.esmt.memoire_back2023.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "Hospitalisation")
@@ -22,9 +24,10 @@ public class Hospitalisation {
 
     private String lit;
 
-    @ManyToOne
-    @JoinColumn(name = "dossierMedical_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "dossierMedical_id", referencedColumnName = "IdDossier")
     @JsonIgnore
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private DossierMedical dossierMedical_id;
 
     public Hospitalisation() {

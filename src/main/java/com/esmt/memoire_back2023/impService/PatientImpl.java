@@ -40,11 +40,6 @@ public class PatientImpl implements PatientService {
         return patient;
     }
 
-    @Override
-    public List<PatientDTO> obtenirTousLesPatients() {
-        return null;
-    }
-
 
     @Override
     public void deletePatient(Long id) {
@@ -94,29 +89,12 @@ public class PatientImpl implements PatientService {
     }
 
     @Override
-    public PatientDTO obtenirPatientParId(Long id) {
-        // Buscar el paciente por su ID
+    public Patient obtenirPatientParId(Long id) {
         Patient patient = patientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Patient non trouvé avec l'ID : " + id));
-
-        // Convertir la entidad en un DTO
-        PatientDTO  obtenirPatientParId = new PatientDTO(
-                patient.getIdPatient(),
-                patient.getNom(),
-                patient.getPrenom(),
-                patient.getSexe(),
-                patient.getLieuNaissance(),
-                patient.getDateNaissance(),
-                patient.getAdresse(),
-                patient.getEmail(),
-                patient.getTelephone()
-        );
-
-        // Devolver el DTO del paciente encontrado
-        return  obtenirPatientParId;
+        return  patient;
     }
 
-    //update
     @Override
     public Patient updatePatient(Long id, PatientDTO patientDTO) {
         // Buscar el paciente por su ID

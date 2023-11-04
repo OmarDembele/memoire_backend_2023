@@ -4,13 +4,13 @@ import com.esmt.memoire_back2023.dto.ConsultationDTO;
 import com.esmt.memoire_back2023.entity.*;
 import com.esmt.memoire_back2023.repository.ConsultationRepository;
 import com.esmt.memoire_back2023.repository.DossierRepository;
+import com.esmt.memoire_back2023.repository.PersonnelsRepository;
 import com.esmt.memoire_back2023.services.ConsultationService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ConsultationImpl implements ConsultationService {
@@ -21,6 +21,14 @@ public class ConsultationImpl implements ConsultationService {
     @Autowired
     private DossierRepository dossierRepository;
 
+    @Autowired
+    private PersonnelsRepository personnelsRepository;
+
+    public ConsultationImpl(ConsultationRepository consultationRepository, DossierRepository dossierRepository) {
+        this.consultationRepository = consultationRepository;
+        this.dossierRepository = dossierRepository;
+    }
+
     @Override
     public Consultation addConsultation(ConsultationDTO consultationDTO) {
         Consultation consultation = convertDTOToEntity(consultationDTO);
@@ -29,13 +37,15 @@ public class ConsultationImpl implements ConsultationService {
     }
 
     @Override
-    public List<ConsultationDTO> getAllConsultations() {
-        return null;
+    public List<Consultation> getAllConsultations() {
+        return consultationRepository.findAll();
     }
 
     @Override
-    public ConsultationDTO getConsultationById(Long id) {
-        return null;
+    public Consultation getConsultationById(Long id) {
+        Consultation consultation = consultationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("L'ID non trouvé : " + id));
+        return consultation;
     }
 
 
@@ -49,12 +59,6 @@ public class ConsultationImpl implements ConsultationService {
     public Consultation convertDTOToEntity(ConsultationDTO consultationDTO) {
         Consultation consultation = new Consultation();
 
-        consultation.setPatients(new HashSet<>());
-        consultation.getPatients().add(new Patient(consultationDTO.getPatientId()));
-
-        consultation.setMedecinTraitant(new Personnels(consultationDTO.getMedecinTraitantId()));
-        consultation.setMedecinConsultant(new Personnels(consultationDTO.getMedecinConsultantId()));
-        consultation.setMedecinChirurgien(new Personnels(consultationDTO.getMedecinChirurgienId()));
         consultation.setTaille(consultationDTO.getTaille());
         consultation.setPoids(consultationDTO.getPoids());
         consultation.setNameurgence(consultationDTO.getNameurgence());
@@ -66,9 +70,27 @@ public class ConsultationImpl implements ConsultationService {
         consultation.setAncientraitement(consultationDTO.getAncientraitement());
         consultation.setDateconsultation(consultationDTO.getDateconsultation());
 
+        if (consultationDTO.getMedecinConsultantId() != null) {
+            Personnels personnels = personnelsRepository.findById(consultationDTO.getMedecinConsultantId())
+                    .orElseThrow(() -> new EntityNotFoundException("ID non trouvé : " + consultationDTO.getMedecinConsultantId()));
+            consultation.setMedecinConsultant(personnels);
+        }
+
+        if (consultationDTO.getMedecinTraitantId() != null) {
+            Personnels personnels2 = personnelsRepository.findById(consultationDTO.getMedecinTraitantId())
+                    .orElseThrow(() -> new EntityNotFoundException("ID non trouvé: " + consultationDTO.getMedecinTraitantId()));
+            consultation.setMedecinTraitant(personnels2);
+        }
+
+        if (consultationDTO.getMedecinChirurgienId() != null) {
+            Personnels personnels3 = personnelsRepository.findById(consultationDTO.getMedecinChirurgienId())
+                    .orElseThrow(() -> new EntityNotFoundException("ID non trouvé: " + consultationDTO.getMedecinChirurgienId()));
+            consultation.setMedecinChirurgien(personnels3);
+        }
+
         if (consultationDTO.getDossierMedical_id() != null) {
             DossierMedical dossierMedical = dossierRepository.findById(consultationDTO.getDossierMedical_id())
-                    .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + consultationDTO.getDossierMedical_id()));
+                    .orElseThrow(() -> new EntityNotFoundException("ID non trouvé: " + consultationDTO.getDossierMedical_id()));
             consultation.setDossierMedical_id(dossierMedical);
         }
         return consultation;

@@ -26,17 +26,11 @@ public class ExamenImpl implements ExamenService {
         return examenMedical1;
     }
     @Override
-    public ExamenDTO getExamenMedicalById(Long id) {
+    public ExamenMedical getExamenMedicalById(Long id) {
         ExamenMedical examenMedical = examenRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Examen médical non trouvé avec l'ID : " + id));
 
-        return new ExamenDTO(
-                examenMedical.getId(),
-                examenMedical.getType(),
-                examenMedical.getResultat(),
-                examenMedical.getDossierMedical_id().getIdDossier() //
-
-        );
+        return examenMedical;
     }
     @Override
     public void delleteExam(Long id) {

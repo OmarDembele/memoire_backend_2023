@@ -1,7 +1,6 @@
 package com.esmt.memoire_back2023.entity;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 
@@ -26,6 +25,15 @@ public class DossierMedical {
     @OneToMany(mappedBy = "dossierMedical_id", cascade = CascadeType.ALL)
     private List<Hospitalisation> hospitalisations;
 
+    @OneToMany(mappedBy = "dossier_medical_id", cascade = CascadeType.ALL)
+    private List<ExamenMedical> examens;
+
+    @OneToMany(mappedBy = "dossier_medicalId", cascade = CascadeType.ALL)
+    private List<Prescription> prescriptions;
+
+    @OneToMany(mappedBy = "dossierMedical_id", cascade = CascadeType.ALL)
+    private List<Consultation> consultation;
+
     public DossierMedical() {
     }
 
@@ -35,15 +43,15 @@ public class DossierMedical {
         this.description = description;
     }
 
-    public DossierMedical(Long idDossier, String numero_dossier, String dateCreation, String description, List<Hospitalisation> hospitalisations) {
+    public DossierMedical(Long idDossier, String numero_dossier, String dateCreation, String description, List<Hospitalisation> hospitalisations, List<Prescription> prescriptions, List<Consultation> consultation) {
         IdDossier = idDossier;
         this.numero_dossier = numero_dossier;
         this.dateCreation = dateCreation;
         this.description = description;
         this.hospitalisations = hospitalisations;
+        this.prescriptions = prescriptions;
+        this.consultation = consultation;
     }
-
-
 
     public Long getIdDossier() {
         return IdDossier;
@@ -83,5 +91,29 @@ public class DossierMedical {
 
     public void setHospitalisations(List<Hospitalisation> hospitalisations) {
         this.hospitalisations = hospitalisations;
+    }
+
+    public List<ExamenMedical> getExamens() {
+        return examens;
+    }
+
+    public void setExamens(List<ExamenMedical> examens) {
+        this.examens = examens;
+    }
+
+    public List<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(List<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+    public List<Consultation> getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(List<Consultation> consultation) {
+        this.consultation = consultation;
     }
 }

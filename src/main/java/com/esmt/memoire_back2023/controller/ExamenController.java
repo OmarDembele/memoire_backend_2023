@@ -31,7 +31,7 @@ public class ExamenController {
     }
 
     @GetMapping(path = "/{id}")
-    public ExamenDTO getExamenById(@PathVariable Long id) {
+    public ExamenMedical getExamenById(@PathVariable Long id) {
         return examenService.getExamenMedicalById(id);
     }
 

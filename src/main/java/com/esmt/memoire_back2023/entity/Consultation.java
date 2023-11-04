@@ -1,5 +1,6 @@
 package com.esmt.memoire_back2023.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,23 +12,24 @@ public class Consultation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConsultation;
 
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "dossierMedicalId")
+    @JsonIgnore
     private DossierMedical dossierMedical_id;
-
-    @ManyToMany(mappedBy = "consultations", cascade = CascadeType.REMOVE)
-    private Set<Patient> patients = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "medecin_traitant_id")
+    @JsonIgnore
     private Personnels medecinTraitant;
 
     @ManyToOne
     @JoinColumn(name = "medecin_consultant_id")
+    @JsonIgnore
     private Personnels medecinConsultant;
 
     @ManyToOne
     @JoinColumn(name = "medecin_chirurgien_id")
+    @JsonIgnore
     private Personnels medecinChirurgien;
 
     private String poids;
@@ -60,16 +62,8 @@ public class Consultation {
         this.description = description;
     }
 
-    public Consultation(Long idConsultation, Set<Patient> patients, String diagnostic, String description) {
+    public Consultation(Long idConsultation, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String diagnostic, String description) {
         this.idConsultation = idConsultation;
-        this.patients = patients;
-        this.diagnostic = diagnostic;
-        this.description = description;
-    }
-
-    public Consultation(Long idConsultation, Set<Patient> patients, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String diagnostic, String description) {
-        this.idConsultation = idConsultation;
-        this.patients = patients;
         this.medecinTraitant = medecinTraitant;
         this.medecinConsultant = medecinConsultant;
         this.medecinChirurgien = medecinChirurgien;
@@ -77,9 +71,8 @@ public class Consultation {
         this.description = description;
     }
 
-    public Consultation(Long idConsultation, Set<Patient> patients, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String antecedent, String ancientraitement, String diagnostic, String description, String dateconsultation) {
+    public Consultation(Long idConsultation, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String antecedent, String ancientraitement, String diagnostic, String description, String dateconsultation) {
         this.idConsultation = idConsultation;
-        this.patients = patients;
         this.medecinTraitant = medecinTraitant;
         this.medecinConsultant = medecinConsultant;
         this.medecinChirurgien = medecinChirurgien;
@@ -90,9 +83,8 @@ public class Consultation {
         this.dateconsultation = dateconsultation;
     }
 
-    public Consultation(Long idConsultation, Set<Patient> patients, DossierMedical dossierMedical_id, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
+    public Consultation(Long idConsultation, DossierMedical dossierMedical_id, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
         this.idConsultation = idConsultation;
-        this.patients = patients;
         this.dossierMedical_id = dossierMedical_id;
         this.medecinTraitant = medecinTraitant;
         this.medecinConsultant = medecinConsultant;
@@ -125,10 +117,6 @@ public class Consultation {
         this.dossierMedical_id = dossierMedical_id;
     }
 
-    public Set<Patient> getPatients() {
-        return patients;
-    }
-
     public String getDiagnostic() {
         return diagnostic;
     }
@@ -143,10 +131,6 @@ public class Consultation {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setPatients(Set<Patient> patients) {
-        this.patients = patients;
     }
 
     public Personnels getMedecinTraitant() {

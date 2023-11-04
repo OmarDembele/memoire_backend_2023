@@ -5,7 +5,6 @@ import com.esmt.memoire_back2023.entity.DossierMedical;
 public class ConsultationDTO {
 
     private Long id;
-    private Long patientId;
     private Long dossierMedical_id;
     private Long medecinTraitantId;
     private Long medecinConsultantId;
@@ -33,9 +32,8 @@ public class ConsultationDTO {
     public ConsultationDTO() {
     }
 
-    public ConsultationDTO(Long id, Long patientId, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, String diagnostic, String description) {
+    public ConsultationDTO(Long id, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, String diagnostic, String description) {
         this.id = id;
-        this.patientId = patientId;
         this.medecinTraitantId = medecinTraitantId;
         this.medecinConsultantId = medecinConsultantId;
         this.medecinChirurgienId = medecinChirurgienId;
@@ -45,9 +43,8 @@ public class ConsultationDTO {
         this.description = description;
     }
 
-    public ConsultationDTO(Long id, Long patientId, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, Long personnelId, String diagnostic, String description) {
+    public ConsultationDTO(Long id, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, Long personnelId, String diagnostic, String description) {
         this.id = id;
-        this.patientId = patientId;
         this.medecinTraitantId = medecinTraitantId;
         this.medecinConsultantId = medecinConsultantId;
         this.medecinChirurgienId = medecinChirurgienId;
@@ -58,9 +55,8 @@ public class ConsultationDTO {
         this.description = description;
     }
 
-    public ConsultationDTO(Long id, Long patientId, Long dossierMedical_id, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, Long personnelId, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
+    public ConsultationDTO(Long id, Long dossierMedical_id, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, Long personnelId, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
         this.id = id;
-        this.patientId = patientId;
         this.dossierMedical_id = dossierMedical_id;
         this.medecinTraitantId = medecinTraitantId;
         this.medecinConsultantId = medecinConsultantId;
@@ -75,9 +71,8 @@ public class ConsultationDTO {
         this.description = description;
     }
 
-    public ConsultationDTO(Long id, Long patientId, Long dossierMedical_id, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, Long personnelId, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
+    public ConsultationDTO(Long id, Long dossierMedical_id, Long medecinTraitantId, Long medecinConsultantId, Long medecinChirurgienId, String antecedentsMedicaux, String anciensTraitements, Long personnelId, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
         this.id = id;
-        this.patientId = patientId;
         this.dossierMedical_id = dossierMedical_id;
         this.medecinTraitantId = medecinTraitantId;
         this.medecinConsultantId = medecinConsultantId;
@@ -107,14 +102,6 @@ public class ConsultationDTO {
 
     public void setDossierMedical_id(Long dossierMedical_id) {
         this.dossierMedical_id = dossierMedical_id;
-    }
-
-    public Long getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
     }
 
     public Long getMedecinTraitantId() {
