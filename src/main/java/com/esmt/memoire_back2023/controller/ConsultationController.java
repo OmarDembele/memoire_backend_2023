@@ -26,6 +26,12 @@ public class ConsultationController {
         return consultation;
     }
 
+    @GetMapping("/dossier/{dossierMedicalId}")
+    public List<Consultation> getConsultationsByDossierMedical(@PathVariable Long dossierMedicalId) {
+        List<Consultation> consultations = consultationService.getConsultationsByDossierMedical(dossierMedicalId);
+        return consultations;
+    }
+
     @DeleteMapping("/{id}")
     public void supprimerConsultation(@PathVariable Long id) {
         consultationService.deleteConsultation(id);

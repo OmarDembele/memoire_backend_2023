@@ -9,6 +9,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NextRvImpl implements NextRvService {
 
@@ -30,6 +32,11 @@ public class NextRvImpl implements NextRvService {
         nextRvRepository.delete(nextRv);
     }
 
+    @Override
+    public List<NextRv> getAllRv(Long id) {
+        return nextRvRepository.findByPersonnel(id);
+    }
+
     private NextRv convertDtoToEntity(NextRvDTO nextRvDTO){
         NextRv nextRv = new NextRv();
 
@@ -37,6 +44,7 @@ public class NextRvImpl implements NextRvService {
         nextRv.setMedecinassigne(nextRvDTO.getMedecinassigne());
         nextRv.setDaterv(nextRvDTO.getDaterv());
         nextRv.setHeurerv(nextRvDTO.getHeurerv());
+        nextRv.setPersonnel(nextRvDTO.getPersonnel());
         return nextRv;
     }
 }

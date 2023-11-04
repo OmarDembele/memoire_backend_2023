@@ -18,20 +18,16 @@ public class ExamenMedical {
 
     private Long dossier_medical_id;
 
+    private Long personnel;
+
     public ExamenMedical() {
     }
 
-    public ExamenMedical(Long id, String type, String resultat) {
+    public ExamenMedical(Long id, String type, String resultat,Long personnel) {
         this.id = id;
         this.type = type;
         this.resultat = resultat;
-    }
-
-    public ExamenMedical(Long id, String type, String resultat, Long dossierMedical_id) {
-        this.id = id;
-        this.type = type;
-        this.resultat = resultat;
-        this.dossier_medical_id = dossierMedical_id;
+        this.personnel = personnel;
     }
 
     public Long getId() {
@@ -58,11 +54,19 @@ public class ExamenMedical {
         this.resultat = resultat;
     }
 
-    public Long getDossierMedical_id() {
+    public Long getDossier_medical_id() {
         return dossier_medical_id;
     }
 
-    public void setDossierMedical_id(Long dossierMedical_id) {
-        this.dossier_medical_id = dossierMedical_id;
+    public void setDossier_medical_id(Long dossier_medical_id) {
+        this.dossier_medical_id = dossier_medical_id;
+    }
+
+    public Long getPersonnel() {
+        return personnel;
+    }
+
+    public void setPersonnel(Long personnel) {
+        this.personnel = personnel;
     }
 }

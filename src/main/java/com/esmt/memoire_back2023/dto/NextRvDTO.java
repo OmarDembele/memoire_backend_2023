@@ -13,15 +13,18 @@ public class NextRvDTO {
 
     private String daterv;
 
+    private Long personnel;
+
     public NextRvDTO() {
     }
 
-    public NextRvDTO(Long id, Long dossierid, String medecinassigne, String heurerv, String daterv) {
+    public NextRvDTO(Long id, Long dossierid, String medecinassigne, String heurerv, String daterv, Long personnel) {
         this.id = id;
         this.dossierid = dossierid;
         this.medecinassigne = medecinassigne;
         this.heurerv = heurerv;
         this.daterv = daterv;
+        this.personnel = personnel;
     }
 
     public Long getId() {
@@ -62,6 +65,14 @@ public class NextRvDTO {
 
     public void setDaterv(String daterv) {
         this.daterv = daterv;
+    }
+
+    public Long getPersonnel() {
+        return personnel;
+    }
+
+    public void setPerosnnel(Long personnel) {
+        this.personnel = personnel;
     }
 }
 

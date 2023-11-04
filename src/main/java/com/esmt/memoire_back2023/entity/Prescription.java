@@ -18,14 +18,17 @@ public class Prescription {
 
     private Long dossier_medicalId;
 
+    private Long personnel;
+
     public Prescription() {
     }
 
-    public Prescription(Long id, Long dossierMedical_id, String type, String instruction) {
+    public Prescription(Long id, Long dossierMedical_id, String type, String instruction,Long personnel) {
         this.id = id;
         this.dossier_medicalId = dossierMedical_id;
         this.type = type;
         this.instruction = instruction;
+        personnel = personnel;
     }
 
     public Long getId() {
@@ -34,14 +37,6 @@ public class Prescription {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getDossierMedical_id() {
-        return dossier_medicalId;
-    }
-
-    public void setDossierMedical_id(Long dossierMedical_id) {
-        this.dossier_medicalId = dossierMedical_id;
     }
 
     public String getType() {
@@ -58,5 +53,21 @@ public class Prescription {
 
     public void setInstruction(String instruction) {
         this.instruction = instruction;
+    }
+
+    public Long getDossier_medicalId() {
+        return dossier_medicalId;
+    }
+
+    public void setDossier_medicalId(Long dossier_medicalId) {
+        this.dossier_medicalId = dossier_medicalId;
+    }
+
+    public Long getPersonnel() {
+        return personnel;
+    }
+
+    public void setPersonnel(Long personnel) {
+        this.personnel = personnel;
     }
 }

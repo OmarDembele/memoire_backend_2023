@@ -55,6 +55,11 @@ public class ConsultationImpl implements ConsultationService {
         consultationRepository.delete(consultation);
     }
 
+    @Override
+    public List<Consultation> getConsultationsByDossierMedical(Long dossierMedicalId) {
+        return consultationRepository.findByDossierMedicalId(dossierMedicalId);
+    }
+
     public Consultation convertDTOToEntity(ConsultationDTO consultationDTO) {
         Consultation consultation = new Consultation();
         consultation.setMedecinConsultant(consultationDTO.getMedecinConsultant());

@@ -61,6 +61,11 @@ public class HospitalisationImpl implements HospitalisationService {
         );
     }
 
+    @Override
+    public List<Hospitalisation> getHospitalisationsByDossierMedical(Long dossierMedicalId) {
+        return hospitalisationRepository.findByDossierMedicalId(dossierMedicalId);
+    }
+
 
     private Hospitalisation convertDTOToEntity(HospitalisationDTO hospitalisationDTO){
         Hospitalisation hospitalisation = new Hospitalisation();

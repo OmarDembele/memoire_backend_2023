@@ -10,6 +10,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExamenImpl implements ExamenService {
 
@@ -39,13 +41,19 @@ public class ExamenImpl implements ExamenService {
         examenRepository.delete(examenMedical);
     }
 
+    @Override
+    public List<ExamenMedical> findByPersonnel(Long personnelId) {
+        return examenRepository.findByPersonnel(personnelId);
+    }
+
 
     private ExamenMedical convertDTOToEntity(ExamenDTO examenDTO){
         ExamenMedical examenMedical = new ExamenMedical();
 
         examenMedical.setType(examenDTO.getType());
         examenMedical.setResultat(examenDTO.getResultat());
-        examenMedical.setDossierMedical_id(examenMedical.getDossierMedical_id());
+        examenMedical.setDossier_medical_id(examenDTO.getDossier_medical_id());
+        examenMedical.setPersonnel(examenDTO.getPersonnel());
         return examenMedical;
     }
 

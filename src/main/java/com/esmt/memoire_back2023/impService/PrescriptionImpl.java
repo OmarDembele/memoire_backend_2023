@@ -36,7 +36,8 @@ public class PrescriptionImpl implements PrescriptionService {
 
         prescription.setInstruction(prescriptionDTO.getInstruction());
         prescription.setType(prescriptionDTO.getType());
-        prescription.setDossierMedical_id(prescriptionDTO.getDossierMedical_id());
+        prescription.setDossier_medicalId(prescriptionDTO.getDossier_medicalId());
+        prescription.setPersonnel(prescriptionDTO.getPersonnel());
 
         return prescription;
 

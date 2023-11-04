@@ -1,5 +1,6 @@
 package com.esmt.memoire_back2023.repository;
 
+import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.entity.Personnels;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     @Query("SELECT p FROM Patient p WHERE p.personnel_id = :personnelId")
     List<Patient> findByPersonnelId(@Param("personnelId") Long personnelId);
+
+    @Query("SELECT p FROM Patient p WHERE p.dossierMedical = :dossierMedical")
+    List<Patient> findByDossierMedical(@Param("dossierMedical") DossierMedical dossierMedical);
 }

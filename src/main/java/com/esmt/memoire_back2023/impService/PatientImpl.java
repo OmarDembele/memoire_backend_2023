@@ -59,6 +59,11 @@ public class PatientImpl implements PatientService {
         return patientRepository.findByPersonnelId(personnelId);
     }
 
+    @Override
+    public List<Patient> getPatientsByDossierMedical(DossierMedical dossierMedicalId) {
+        return patientRepository.findByDossierMedical(dossierMedicalId);
+    }
+
 
     private Patient convertDTOToEntity(PatientDTO patientDTO){
         Patient patient = new Patient();
