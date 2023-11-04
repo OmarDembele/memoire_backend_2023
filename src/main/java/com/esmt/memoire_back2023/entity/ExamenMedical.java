@@ -16,10 +16,7 @@ public class ExamenMedical {
 
     private String resultat;
 
-    @ManyToOne
-    @JoinColumn(name = "dossier_medical_id")
-    @JsonIgnore
-    private DossierMedical dossier_medical_id;
+    private Long dossier_medical_id;
 
     public ExamenMedical() {
     }
@@ -30,7 +27,7 @@ public class ExamenMedical {
         this.resultat = resultat;
     }
 
-    public ExamenMedical(Long id, String type, String resultat, DossierMedical dossierMedical_id) {
+    public ExamenMedical(Long id, String type, String resultat, Long dossierMedical_id) {
         this.id = id;
         this.type = type;
         this.resultat = resultat;
@@ -61,11 +58,11 @@ public class ExamenMedical {
         this.resultat = resultat;
     }
 
-    public DossierMedical getDossierMedical_id() {
+    public Long getDossierMedical_id() {
         return dossier_medical_id;
     }
 
-    public void setDossierMedical_id(DossierMedical dossierMedical_id) {
+    public void setDossierMedical_id(Long dossierMedical_id) {
         this.dossier_medical_id = dossierMedical_id;
     }
 }

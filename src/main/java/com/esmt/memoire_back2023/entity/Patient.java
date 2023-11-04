@@ -2,8 +2,6 @@ package com.esmt.memoire_back2023.entity;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "Patients")
@@ -43,19 +41,10 @@ public class Patient {
     @Column(name = "groupe_sanguin", length = 255)
     private String groupe_sanguin;
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(
-            name = "patient_consultation",
-            joinColumns = @JoinColumn(name = "idPatient"),
-            inverseJoinColumns = @JoinColumn(name = "idConsultation")
-    )
-    private Set<Consultation> consultations = new HashSet<>();
-
     @OneToOne(cascade = CascadeType.ALL)
     private DossierMedical dossierMedical;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Personnels personnel_id;
+    private Long personnel_id;
 
     public Patient() {
     }
@@ -85,7 +74,7 @@ public class Patient {
         this.dossierMedical = dossierMedical;
     }
 
-    public Patient(Long idPatient, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, String profession, String groupe_sanguin, Set<Consultation> consultations, DossierMedical dossierMedical, Personnels personnel_id) {
+    public Patient(Long idPatient, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, String profession, String groupe_sanguin, DossierMedical dossierMedical, Long personnel_id) {
         this.idPatient = idPatient;
         this.nom = nom;
         this.prenom = prenom;
@@ -97,7 +86,6 @@ public class Patient {
         this.adresse = adresse;
         this.profession = profession;
         this.groupe_sanguin = groupe_sanguin;
-        this.consultations = consultations;
         this.dossierMedical = dossierMedical;
         this.personnel_id = personnel_id;
     }
@@ -185,9 +173,6 @@ public class Patient {
         this.dossierMedical = dossierMedical;
     }
 
-    public Set<Consultation> getConsultations() {
-        return consultations;
-    }
 
     public String getProfession() {
         return profession;
@@ -205,15 +190,12 @@ public class Patient {
         this.groupe_sanguin = groupe_sanguin;
     }
 
-    public void setConsultations(Set<Consultation> consultations) {
-        this.consultations = consultations;
-    }
 
-    public Personnels getPersonnel_id() {
+    public Long getPersonnel_id() {
         return personnel_id;
     }
 
-    public void setPersonnel_id(Personnels personnel_id) {
+    public void setPersonnel_id(Long personnel_id) {
         this.personnel_id = personnel_id;
     }
 }

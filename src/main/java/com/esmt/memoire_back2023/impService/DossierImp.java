@@ -72,8 +72,6 @@ public class DossierImp implements DossierService {
 
         updatedDossier.setDateCreation(dossierToUpdate.getDateCreation());
         updatedDossier.setDescription(dossierToUpdate.getDescription());
-
-        // Enregistrez la mise à jour dans la base de données
         updatedDossier = dossierRepository.save(updatedDossier);
 
         return updatedDossier;

@@ -45,7 +45,6 @@ public class HospitalisationImpl implements HospitalisationService {
         return hospitalisationRepository.findAll();
     }
 
-
     @Override
     public HospitalisationDTO getHospitalisationById(Long id) {
         Hospitalisation hospitalisation = hospitalisationRepository.findById(id)
@@ -58,7 +57,7 @@ public class HospitalisationImpl implements HospitalisationService {
                 hospitalisation.getDatesortie(),
                 hospitalisation.getType(),
                 hospitalisation.getLit(),
-                hospitalisation.getDossierMedical_id().getIdDossier()
+                hospitalisation.getDossierMedical_id()
         );
     }
 
@@ -71,27 +70,7 @@ public class HospitalisationImpl implements HospitalisationService {
         hospitalisation.setDatesortie(hospitalisationDTO.getDatesortie());
         hospitalisation.setType(hospitalisationDTO.getType());
         hospitalisation.setLit(hospitalisationDTO.getLit());
-
-        if (hospitalisationDTO.getDossierMedical_id() != null) {
-            DossierMedical dossierMedical = dossierRepository.findById(hospitalisationDTO.getDossierMedical_id())
-                    .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + hospitalisationDTO.getDossierMedical_id()));
-            hospitalisation.setDossierMedical_id(dossierMedical);
-        }
+        hospitalisation.setDossierMedical_id(hospitalisationDTO.getDossierMedical_id());
         return hospitalisation;
     }
 }
-
-
-
-/*
-if (hospitalisationDTO.getDossierMedical_id() != null) {
-            Long dossierMedicalId = hospitalisationDTO.getDossierMedical_id();
-            Optional<DossierMedical> dossierMedicalOptional = dossierRepository.findById(dossierMedicalId);
-
-            if (dossierMedicalOptional.isPresent()) {
-                DossierMedical dossierMedical = dossierMedicalOptional.get();
-                hospitalisation.setDossierMedical_id(dossierMedical);
-            } else {
-                throw new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + dossierMedicalId);
-            }
- */

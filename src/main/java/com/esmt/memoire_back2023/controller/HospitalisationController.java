@@ -19,12 +19,6 @@ public class HospitalisationController {
     @Autowired
     private HospitalisationService hospitalisationService;
 
-    @Autowired
-    private HospitalisationRepository hospitalisationRepository;
-
-    @Autowired
-    private DossierRepository dossierRepository;
-
     public HospitalisationController(HospitalisationService hospitalisationService) {
         this.hospitalisationService = hospitalisationService;
     }
@@ -46,12 +40,4 @@ public class HospitalisationController {
 
     }
 
-    @GetMapping("/dossier/{dossier_medical_id}/hospitalisations")
-    public ResponseEntity<List<Hospitalisation>> getAllHospiByDossierId(@PathVariable(value = "dossier_medical_id") Long dossier_medical_id) {
-        if (!dossierRepository.existsById(dossier_medical_id)) {
-            throw new RuntimeException("Not found Tutorial with id = " + dossier_medical_id);
-        }
-        List<Hospitalisation> hospitalisations = hospitalisationRepository.findByDossierMedicalId(dossier_medical_id);
-        return new ResponseEntity<>(hospitalisations, HttpStatus.OK);
-    }
 }

@@ -79,25 +79,9 @@ public class PersonnelImpl implements PersonnelService {
     }
 
     @Override
-    public PersonnelsDTO getPersonnelById(Long id) {
-        Personnels personnel = personnelsRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Personnel non trouvé avec l'ID : " + id));
-
-        return new PersonnelsDTO(
-                personnel.getIdPersonnel(),
-                personnel.getNom(),
-                personnel.getPrenom(),
-                personnel.getSexe(),
-                personnel.getLieuNaissance(),
-                personnel.getNumLicence(),
-                personnel.getLogin(),
-                personnel.getPassword(),
-                personnel.getType(),
-                personnel.getStatus(),
-                personnel.getRole(),
-                personnel.getSpecialite(),
-                personnel.getEtat()
-        );
+    public Optional<Personnels> getPersonnelById(Long id) {
+        Optional<Personnels> personnel = personnelsRepository.findById(id);
+        return personnel;
     }
     @Override
     public void deletePersonnel(Long id) {

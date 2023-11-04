@@ -16,15 +16,12 @@ public class Prescription {
 
     private String instruction;
 
-    @ManyToOne
-    @JoinColumn(name = "dossier_medicalId")
-    @JsonIgnore
-    private DossierMedical dossier_medicalId;
+    private Long dossier_medicalId;
 
     public Prescription() {
     }
 
-    public Prescription(Long id, DossierMedical dossierMedical_id, String type, String instruction) {
+    public Prescription(Long id, Long dossierMedical_id, String type, String instruction) {
         this.id = id;
         this.dossier_medicalId = dossierMedical_id;
         this.type = type;
@@ -39,11 +36,11 @@ public class Prescription {
         this.id = id;
     }
 
-    public DossierMedical getDossierMedical_id() {
+    public Long getDossierMedical_id() {
         return dossier_medicalId;
     }
 
-    public void setDossierMedical_id(DossierMedical dossierMedical_id) {
+    public void setDossierMedical_id(Long dossierMedical_id) {
         this.dossier_medicalId = dossierMedical_id;
     }
 

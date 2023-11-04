@@ -12,6 +12,4 @@ import java.util.List;
 @Repository
 @EnableJpaRepositories
 public interface HospitalisationRepository extends JpaRepository<Hospitalisation, Long> {
-    @Query("SELECT h FROM Hospitalisation h WHERE h.dossierMedical_id.id = :dossierMedicalId")
-    List<Hospitalisation> findByDossierMedicalId(@Param("dossierMedicalId") Long dossierMedicalId);
 }

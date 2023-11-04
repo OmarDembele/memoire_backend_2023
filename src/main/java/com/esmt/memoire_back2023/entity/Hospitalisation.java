@@ -24,16 +24,12 @@ public class Hospitalisation {
 
     private String lit;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "dossierMedical_id", referencedColumnName = "IdDossier")
-    @JsonIgnore
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private DossierMedical dossierMedical_id;
+    private Long dossierMedical_id;
 
     public Hospitalisation() {
     }
 
-    public Hospitalisation(Long id, String datehospitalisation, String lieu, String type, String datesortie, String lit, DossierMedical dossierMedical_id) {
+    public Hospitalisation(Long id, String datehospitalisation, String lieu, String type, String datesortie, String lit, Long dossierMedical_id) {
         this.id = id;
         this.datehospitalisation = datehospitalisation;
         this.lieu = lieu;
@@ -91,11 +87,11 @@ public class Hospitalisation {
         this.lit = lit;
     }
 
-    public DossierMedical getDossierMedical_id() {
+    public Long getDossierMedical_id() {
         return dossierMedical_id;
     }
 
-    public void setDossierMedical_id(DossierMedical dossierMedical_id) {
+    public void setDossierMedical_id(Long dossierMedical_id) {
         this.dossierMedical_id = dossierMedical_id;
     }
 }

@@ -28,7 +28,7 @@ public class DossierController {
         return dossierMedical;
     }
 
-    @GetMapping()
+    @GetMapping("")
     public List<DossierDTO> getAllDossiers() {
         return dossierService.obtenirTousLesDossiers();
     }

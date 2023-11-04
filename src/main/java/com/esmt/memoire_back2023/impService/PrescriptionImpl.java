@@ -36,11 +36,7 @@ public class PrescriptionImpl implements PrescriptionService {
 
         prescription.setInstruction(prescriptionDTO.getInstruction());
         prescription.setType(prescriptionDTO.getType());
-        if (prescriptionDTO.getDossierMedical_id() != null) {
-            Prescription prescription1 = prescriptionRepository.findById(prescriptionDTO.getDossierMedical_id())
-                    .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + prescriptionDTO.getDossierMedical_id()));
-            prescription.setDossierMedical_id(prescription1.getDossierMedical_id());
-        }
+        prescription.setDossierMedical_id(prescriptionDTO.getDossierMedical_id());
 
         return prescription;
 

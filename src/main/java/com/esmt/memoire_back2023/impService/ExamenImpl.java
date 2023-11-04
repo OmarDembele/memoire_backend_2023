@@ -45,12 +45,7 @@ public class ExamenImpl implements ExamenService {
 
         examenMedical.setType(examenDTO.getType());
         examenMedical.setResultat(examenDTO.getResultat());
-
-        if (examenDTO.getDossierMedical_id() != null) {
-            DossierMedical examenMedical1 = dossierRepository.findById(examenDTO.getDossierMedical_id())
-                    .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + examenDTO.getDossierMedical_id()));
-            examenMedical.setDossierMedical_id(examenMedical1);
-        }
+        examenMedical.setDossierMedical_id(examenMedical.getDossierMedical_id());
         return examenMedical;
     }
 

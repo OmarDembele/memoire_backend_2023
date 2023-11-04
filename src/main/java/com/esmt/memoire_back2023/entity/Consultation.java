@@ -1,9 +1,6 @@
 package com.esmt.memoire_back2023.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Consultation {
@@ -12,25 +9,13 @@ public class Consultation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConsultation;
 
-    @ManyToOne
-    @JoinColumn(name = "dossierMedicalId")
-    @JsonIgnore
-    private DossierMedical dossierMedical_id;
+    private Long dossierMedical_id;
 
-    @ManyToOne
-    @JoinColumn(name = "medecin_traitant_id")
-    @JsonIgnore
-    private Personnels medecinTraitant;
+    private Long medecin_traitant;
 
-    @ManyToOne
-    @JoinColumn(name = "medecin_consultant_id")
-    @JsonIgnore
-    private Personnels medecinConsultant;
+    private Long medecin_consultant;
 
-    @ManyToOne
-    @JoinColumn(name = "medecin_chirurgien_id")
-    @JsonIgnore
-    private Personnels medecinChirurgien;
+    private Long medecin_chirurgien;
 
     private String poids;
 
@@ -62,33 +47,22 @@ public class Consultation {
         this.description = description;
     }
 
-    public Consultation(Long idConsultation, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String diagnostic, String description) {
+    public Consultation(Long idConsultation, Long medecinTraitant, Long medecinConsultant, Long medecinChirurgien, String diagnostic, String description) {
         this.idConsultation = idConsultation;
-        this.medecinTraitant = medecinTraitant;
-        this.medecinConsultant = medecinConsultant;
-        this.medecinChirurgien = medecinChirurgien;
+        this.medecin_traitant = medecinTraitant;
+        this.medecin_consultant = medecinConsultant;
+        this.medecin_chirurgien = medecinChirurgien;
         this.diagnostic = diagnostic;
         this.description = description;
     }
 
-    public Consultation(Long idConsultation, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String antecedent, String ancientraitement, String diagnostic, String description, String dateconsultation) {
-        this.idConsultation = idConsultation;
-        this.medecinTraitant = medecinTraitant;
-        this.medecinConsultant = medecinConsultant;
-        this.medecinChirurgien = medecinChirurgien;
-        this.antecedent = antecedent;
-        this.ancientraitement = ancientraitement;
-        this.diagnostic = diagnostic;
-        this.description = description;
-        this.dateconsultation = dateconsultation;
-    }
 
-    public Consultation(Long idConsultation, DossierMedical dossierMedical_id, Personnels medecinTraitant, Personnels medecinConsultant, Personnels medecinChirurgien, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
+    public Consultation(Long idConsultation, Long dossierMedical_id, Long medecinTraitant, Long medecinConsultant, Long medecinChirurgien, String poids, String taille, String nameurgence, String adresse, String telephone, String antecedent, String ancientraitement, String dateconsultation, String diagnostic, String description) {
         this.idConsultation = idConsultation;
         this.dossierMedical_id = dossierMedical_id;
-        this.medecinTraitant = medecinTraitant;
-        this.medecinConsultant = medecinConsultant;
-        this.medecinChirurgien = medecinChirurgien;
+        this.medecin_traitant = medecinTraitant;
+        this.medecin_consultant = medecinConsultant;
+        this.medecin_chirurgien = medecinChirurgien;
         this.poids = poids;
         this.taille = taille;
         this.nameurgence = nameurgence;
@@ -109,11 +83,11 @@ public class Consultation {
         this.idConsultation = idConsultation;
     }
 
-    public DossierMedical getDossierMedical_id() {
+    public Long getDossierMedical_id() {
         return dossierMedical_id;
     }
 
-    public void setDossierMedical_id(DossierMedical dossierMedical_id) {
+    public void setDossierMedical_id(Long dossierMedical_id) {
         this.dossierMedical_id = dossierMedical_id;
     }
 
@@ -133,28 +107,28 @@ public class Consultation {
         this.description = description;
     }
 
-    public Personnels getMedecinTraitant() {
-        return medecinTraitant;
+    public Long getMedecinTraitant() {
+        return medecin_traitant;
     }
 
-    public void setMedecinTraitant(Personnels medecinTraitant) {
-        this.medecinTraitant = medecinTraitant;
+    public void setMedecinTraitant(Long medecinTraitant) {
+        this.medecin_traitant = medecinTraitant;
     }
 
-    public Personnels getMedecinConsultant() {
-        return medecinConsultant;
+    public Long getMedecinConsultant() {
+        return medecin_consultant;
     }
 
-    public void setMedecinConsultant(Personnels medecinConsultant) {
-        this.medecinConsultant = medecinConsultant;
+    public void setMedecinConsultant(Long medecinConsultant) {
+        this.medecin_consultant = medecinConsultant;
     }
 
-    public Personnels getMedecinChirurgien() {
-        return medecinChirurgien;
+    public Long getMedecinChirurgien() {
+        return medecin_chirurgien;
     }
 
-    public void setMedecinChirurgien(Personnels medecinChirurgien) {
-        this.medecinChirurgien = medecinChirurgien;
+    public void setMedecinChirurgien(Long medecinChirurgien) {
+        this.medecin_chirurgien = medecinChirurgien;
     }
 
     public String getAntecedent() {
@@ -220,6 +194,8 @@ public class Consultation {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+
 
 }
 

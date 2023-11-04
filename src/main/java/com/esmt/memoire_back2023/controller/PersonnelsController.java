@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -34,9 +35,10 @@ public class PersonnelsController {
         return personnelService.getallPersonnels();
     }
 
-    @GetMapping(path = "/{id}")
-    public PersonnelsDTO getPersonnelById(@PathVariable Long id) {
-        return personnelService.getPersonnelById(id);
+    @GetMapping(path = "id/{id}")
+    public Optional<Personnels> getPersonnelById(@PathVariable Long id) {
+        Optional<Personnels> personnels = personnelService.getPersonnelById(id);
+        return personnels;
     }
 
     @DeleteMapping("/{id}")

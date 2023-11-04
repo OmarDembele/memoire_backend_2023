@@ -65,4 +65,10 @@ public class PatientController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/byPersonnelId/{personnelId}")
+    public List<Patient> getPatientsByPersonnelId(@PathVariable Long personnelId) {
+        List<Patient> patients = patientService.getPatientByPersonnel(personnelId);
+        return patients;
+    }
 }

@@ -51,7 +51,12 @@ public class PatientImpl implements PatientService {
 
     @Override
     public List<Patient> getPatients() {
-       return patientRepository.findAll();
+        return patientRepository.findAll();
+    }
+
+    @Override
+    public List<Patient> getPatientByPersonnel(Long personnelId) {
+        return patientRepository.findByPersonnelId(personnelId);
     }
 
 
@@ -67,23 +72,15 @@ public class PatientImpl implements PatientService {
         patient.setEmail(patientDTO.getEmail());
         patient.setTelephone(patientDTO.getTelephone());
         patient.setProfession(patientDTO.getProfession());
-        patient.setGroupe_sanguin((patient.getGroupe_sanguin()));
-
-        if (patientDTO.getPersonnel_id() != null) {
-            Personnels personnels = personnelsRepository.findById(patientDTO.getPersonnel_id())
-                    .orElseThrow(() -> new EntityNotFoundException("l'ID non trouvé : " + patientDTO.getPersonnel_id()));
-            patient.setPersonnel_id(personnels);
-        }
-        else{
-            patient.setPersonnel_id(null);
-        }
+        patient.setGroupe_sanguin((patientDTO.getGroupe_sanguin()));
+        patient.setPersonnel_id(patientDTO.getPersonnel_id());
 
         if (patientDTO.getDossierMedicalId() != null) {
             DossierMedical dossierMedical1 = dossierMedicalRepository.findById(patientDTO.getDossierMedicalId())
                     .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + patientDTO.getDossierMedicalId()));
             patient.setDossierMedical(dossierMedical1);
         } else {
-
+            patient.setDossierMedical(patientDTO.getDossierMedical());
         }
         return patient;
     }
@@ -101,7 +98,6 @@ public class PatientImpl implements PatientService {
         Patient existingPatient = patientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Patient non trouvé avec l'ID : " + id));
 
-        // Actualizar los campos del paciente con los datos de DTO
         existingPatient.setNom(patientDTO.getNom());
         existingPatient.setPrenom(patientDTO.getPrenom());
         existingPatient.setSexe(patientDTO.getSexe());

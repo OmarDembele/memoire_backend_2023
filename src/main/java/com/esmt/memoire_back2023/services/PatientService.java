@@ -15,5 +15,7 @@ public interface PatientService {
 
     List<Patient> getPatients();
 
+    List<Patient> getPatientByPersonnel(Long personnelId);
+
 
 }
