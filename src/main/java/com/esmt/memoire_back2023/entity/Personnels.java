@@ -27,6 +27,15 @@ public class Personnels{
     @Column(name = "lieuNaissance", length = 255)
     private String lieuNaissance;
 
+    @Column(name = "dateNaissance", length = 255)
+    private String dateNaissance;
+
+    @Column(name = "adresse", length = 255)
+    private String adresse;
+
+    @Column(name = "telephone", length = 255)
+    private String telephone;
+
     @Column(name = "numLicence", length = 255)
     private String numLicence;
 
@@ -36,15 +45,12 @@ public class Personnels{
     @Column(name = "password", length = 255)
     private String password;
 
+    @Column(name = "email", length = 255)
+    private String email;
+
     @Column(name = "rolePersonnel", length = 255)
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
-    @Column(name = "status", length = 45)
-    private Long status;
-
-    @Column(name = "type", length = 255)
-    private String type;
 
     @Column(name = "specialite", length = 255)
     private String specialite;
@@ -52,23 +58,29 @@ public class Personnels{
     @Column(name = "etat", length = 255)
     private String etat;
 
+    @Column(name = "dateInscription", length = 255)
+    private String dateInscription;
+
     public Personnels() {
     }
 
-    public Personnels(Long idPersonnel, String nom, String prenom, String sexe, String lieuNaissance, String numLicence, String login, String password, UserRole role, Long status, String type, String specialite, String etat) {
+    public Personnels(Long idPersonnel, String nom, String prenom, String sexe,String dateInscription, String lieuNaissance, String dateNaissance, String adresse, String telephone, String numLicence, String login, String password, UserRole role, String specialite, String etat) {
         this.idPersonnel = idPersonnel;
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
         this.lieuNaissance = lieuNaissance;
+        this.dateNaissance = dateNaissance;
+        this.adresse = adresse;
+        this.telephone = telephone;
         this.numLicence = numLicence;
         this.login = login;
         this.password = password;
-        this.type = type;
-        this.status = status;
         this.role = role;
         this.specialite = specialite;
         this.etat = etat;
+        this.dateInscription = dateInscription;
+
     }
 
     public Personnels(Long medecinTraitantId) {
@@ -92,6 +104,14 @@ public class Personnels{
 
     public String getNom() {
         return nom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPrenom() {
@@ -118,14 +138,24 @@ public class Personnels{
         return password;
     }
 
-    public String getType() {
-        return type;
+    public String getDateNaissance() {
+        return dateNaissance;
+    }
+    public String getAdresse() {
+        return adresse;
+    }
+    public String getTelephone() {
+        return telephone;
     }
 
-    public Long getStatus() {
-        return status;
+
+    public String getDateInscription() {
+        return dateInscription;
     }
 
+    public void setDateInscription(String dateInscription) {
+        this.dateInscription = dateInscription;
+    }
 
     public void setNom(String nom) {
         this.nom = nom;
@@ -155,12 +185,14 @@ public class Personnels{
         this.password = password;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
-
-    public void setStatus(Long status) {
-        this.status = status;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public void setIdPersonnel(Long idPersonnel) {
@@ -180,4 +212,3 @@ public class Personnels{
     }
 
 }
-
