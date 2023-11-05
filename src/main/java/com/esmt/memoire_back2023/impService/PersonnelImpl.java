@@ -1,6 +1,7 @@
 package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.PersonnelsDTO;
+import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.entity.UserRole;
 import com.esmt.memoire_back2023.repository.PersonnelsRepository;
@@ -56,6 +57,8 @@ public class PersonnelImpl implements PersonnelService {
 
     }
 
+  
+
     @Override
     public List<Personnels> getallPersonnels() {
         return personnelsRepository.findAll();
@@ -110,11 +113,6 @@ public class PersonnelImpl implements PersonnelService {
         updatedPersonnels = personnelsRepository.save(updatedPersonnels);
 
         return updatedPersonnels;
-    }
-
-    @Override
-    public List<Personnels> getMedecins() {
-        return personnelsRepository.findMedecins();
     }
 
 }
