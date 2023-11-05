@@ -10,6 +10,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PrescriptionImpl implements PrescriptionService {
 
@@ -29,6 +31,11 @@ public class PrescriptionImpl implements PrescriptionService {
         Prescription prescription = prescriptionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("L'id n'existe pas : " + id));
         prescriptionRepository.delete(prescription);
+    }
+
+    @Override
+    public List<Prescription> getPrescByPersonnelId(Long personnelId) {
+        return prescriptionRepository.findByPersonnel(personnelId);
     }
 
     private Prescription convertDTOToEntity(PrescriptionDTO prescriptionDTO){
