@@ -21,4 +21,6 @@ public interface PersonnelService {
 
     Personnels updatePersonnels(Long id, PersonnelsDTO personnelsDTO);
 
+    List<Personnels> getMedecins();
+
 }

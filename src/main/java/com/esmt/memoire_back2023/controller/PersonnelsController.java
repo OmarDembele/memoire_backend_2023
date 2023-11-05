@@ -6,6 +6,7 @@ import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.entity.UserRole;
 import com.esmt.memoire_back2023.services.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,6 +60,17 @@ public class PersonnelsController {
             return ResponseEntity.ok(updatedPersonnels);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/medecins")
+    public ResponseEntity<List<Personnels>> getMedecins() {
+        List<Personnels> medecins = personnelService.getMedecins();
+
+        if (medecins.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(medecins, HttpStatus.OK);
         }
     }
 

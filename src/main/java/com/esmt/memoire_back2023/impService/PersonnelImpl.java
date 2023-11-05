@@ -126,4 +126,9 @@ public class PersonnelImpl implements PersonnelService {
         return updatedPersonnels;
     }
 
+    @Override
+    public List<Personnels> getMedecins() {
+        return personnelsRepository.findMedecins();
+    }
+
 }
