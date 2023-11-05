@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface PersonnelService {
     Personnels creerPersonnels(PersonnelsDTO personnelsDTO);
 
-    List<PersonnelsDTO> getallPersonnels();
+    List<Personnels> getallPersonnels();
 
     Optional<Personnels> getPersonnelById(Long id);
 

@@ -1,6 +1,7 @@
 package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.PersonnelsDTO;
+import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.entity.UserRole;
 import com.esmt.memoire_back2023.repository.PersonnelsRepository;
@@ -38,44 +39,57 @@ public class PersonnelImpl implements PersonnelService {
         personnels.setNom(personnelsDTO.getNom());
         personnels.setPrenom(personnelsDTO.getPrenom());
         personnels.setSexe(personnelsDTO.getSexe());
+        personnels.setDateNaissance(personnelsDTO.getDateNaissance());
         personnels.setLieuNaissance(personnelsDTO.getLieuNaissance());
+        personnels.setEmail(personnelsDTO.getEmail());
+        personnels.setAdresse(personnelsDTO.getAdresse());
+        personnels.setTelephone(personnelsDTO.getTelephone());
+
         personnels.setNumLicence(personnelsDTO.getNumLicence());
-        personnels.setType(personnelsDTO.getType());
-        personnels.setStatus(personnelsDTO.getStatus());
         personnels.setSpecialite(personnelsDTO.getSpecialite());
-        personnels.setEtat(personnelsDTO.getEtat());
         personnels.setRole(personnelsDTO.getRole());
+
         personnels.setLogin(personnelsDTO.getLogin());
         personnels.setPassword(this.passwordEncoder.encode(personnelsDTO.getPassword()));
+        personnels.setDateInscription(personnelsDTO.getDateInscription());
+        personnels.setEtat(personnelsDTO.getEtat());
         return personnels;
 
     }
 
-    public List<PersonnelsDTO> getallPersonnels() {
-        List<Personnels> personnels = personnelsRepository.findAll();
+    //public List<PersonnelsDTO> getallPersonnels() {
+      //  List<Personnels> personnels = personnelsRepository.findAll();
 
         //convertir la liste des personnels en liste de personnelsDTO
-        List<PersonnelsDTO> personnelsDTOs = personnels.stream()
-                .map(personnel -> new PersonnelsDTO(
-                        personnel.getIdPersonnel(),
-                        personnel.getNom(),
-                        personnel.getPrenom(),
-                        personnel.getSexe(),
-                        personnel.getLieuNaissance(),
-                        personnel.getNumLicence(),
-                        personnel.getLogin(),
-                        personnel.getPassword(),
-                        personnel.getType(),
-                        personnel.getStatus(),
-                        personnel.getRole(),
-                        personnel.getSpecialite(),
-                        personnel.getEtat()
-                ))
-                .collect(Collectors.toList());
+    // List<PersonnelsDTO> personnelsDTOs = personnels.stream()
+    //          .map(personnel -> new PersonnelsDTO(
+    //                  personnel.getIdPersonnel(),
+    //                  personnel.getNom(),
+    //                  personnel.getPrenom(),
+    //                  personnel.getDateInscription(),
+    //                  personnel.getSexe(),
+    //                  personnel.getLieuNaissance(),
+    //                  personnel.getNumLicence(),
+    //                  personnel.getLogin(),
+    //                  personnel.getPassword(),
+    //                  personnel.getEmail(),
+    //                  personnel.getAdresse(),
+    //                  personnel.getTelephone(),
+    //                  personnel.getDateNaissance(),
+    //                  personnel.getRole(),
+    //                  personnel.getSpecialite(),
+    //                  personnel.getEtat()
+    //          ))
+    //          .collect(Collectors.toList());
 
-        return personnelsDTOs;
+    //  return personnelsDTOs;
 
 
+    //}
+
+    @Override
+    public List<Personnels> getallPersonnels() {
+        return personnelsRepository.findAll();
     }
 
     @Override
@@ -110,12 +124,15 @@ public class PersonnelImpl implements PersonnelService {
         updatedPersonnels.setSexe(personnelsDTO.getSexe());
         updatedPersonnels.setLieuNaissance(personnelsDTO.getLieuNaissance());
         updatedPersonnels.setNumLicence(personnelsDTO.getNumLicence());
-        updatedPersonnels.setType(personnelsDTO.getType());
-        updatedPersonnels.setStatus(personnelsDTO.getStatus());
+        updatedPersonnels.setAdresse(personnelsDTO.getAdresse());
+        updatedPersonnels.setEmail(personnelsDTO.getEmail());
+        updatedPersonnels.setTelephone(personnelsDTO.getTelephone());
+        updatedPersonnels.setDateNaissance(personnelsDTO.getDateNaissance());
         updatedPersonnels.setSpecialite(personnelsDTO.getSpecialite());
         updatedPersonnels.setEtat(personnelsDTO.getEtat());
         updatedPersonnels.setRole(personnelsDTO.getRole());
         updatedPersonnels.setLogin(personnelsDTO.getLogin());
+        updatedPersonnels.setDateInscription(personnelsDTO.getDateInscription());
 
         if (personnelsDTO.getPassword() != null) {
             updatedPersonnels.setPassword(this.passwordEncoder.encode(personnelsDTO.getPassword()));

@@ -47,6 +47,7 @@ public class PatientDTO {
         this.telephone = telephone;
         this.email = email;
         this.adresse = adresse;
+
     }
 
     public PatientDTO(Long id, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, Long dossierMedicalId) {
@@ -60,6 +61,7 @@ public class PatientDTO {
         this.email = email;
         this.adresse = adresse;
         this.dossierMedicalId = dossierMedicalId;
+
     }
 
     public PatientDTO(Long id, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, DossierMedical dossierMedical) {
@@ -73,6 +75,7 @@ public class PatientDTO {
         this.email = email;
         this.adresse = adresse;
         this.dossierMedical = dossierMedical;
+
     }
 
     public PatientDTO(Long id, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, String profession, String groupe_sanguin, Long dossierMedicalId, DossierMedical dossierMedical, Long personnel_id) {
@@ -90,6 +93,7 @@ public class PatientDTO {
         this.dossierMedicalId = dossierMedicalId;
         this.dossierMedical = dossierMedical;
         this.personnel_id = personnel_id;
+
     }
 
     public Long getId() {
@@ -135,6 +139,8 @@ public class PatientDTO {
     public String getLieuNaissance() {
         return lieuNaissance;
     }
+
+
 
     public void setLieuNaissance(String lieuNaissance) {
         this.lieuNaissance = lieuNaissance;

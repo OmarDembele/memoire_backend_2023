@@ -8,33 +8,46 @@ public class PersonnelsDTO {
     private String nom;
     private String prenom;
     private String sexe;
+
     private String lieuNaissance;
+    private String dateNaissance;
+
+    private String adresse;
+
+    private String email;
+
+    private String dateInscription;
+
+    private String telephone;
     private String numLicence;
     private String login;
     private String password;
     private UserRole role;
-    private Long status;
-    private String type;
+
+
     private String specialite;
     private String etat;
 
     public PersonnelsDTO() {
     }
 
-    public PersonnelsDTO(Long idPersonnel, String nom, String prenom, String sexe, String lieuNaissance, String numLicence, String login, String password, String type, Long status, UserRole role, String specialite, String etat) {
+    public PersonnelsDTO(Long idPersonnel,String email, String nom,String dateInscription, String prenom, String sexe, String lieuNaissance, String dateNaissance, String adresse, String telephone, String numLicence, String login, String password, UserRole role, String specialite, String etat) {
         this.idPersonnel = idPersonnel;
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
         this.lieuNaissance = lieuNaissance;
+        this.dateNaissance = dateNaissance;
+        this.adresse = adresse;
+        this.telephone = telephone;
         this.numLicence = numLicence;
         this.login = login;
         this.password = password;
-        this.type = type;
-        this.status = status;
         this.role = role;
         this.specialite = specialite;
         this.etat = etat;
+        this.email = email;
+        this.dateInscription = dateInscription;
     }
 
     public Long getIdPersonnel() {
@@ -69,12 +82,44 @@ public class PersonnelsDTO {
         return password;
     }
 
-    public String getType() {
-        return type;
+    public String getDateNaissance() {
+        return dateNaissance;
     }
 
-    public Long getStatus() {
-        return status;
+    public String getDateInscription() {
+        return dateInscription;
+    }
+
+    public void setDateInscription(String dateInscription) {
+        this.dateInscription = dateInscription;
+    }
+
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public UserRole getRole() {
@@ -125,13 +170,7 @@ public class PersonnelsDTO {
         this.role = role;
     }
 
-    public void setStatus(Long status) {
-        this.status = status;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public void setSpecialite(String specialite) {
         this.specialite = specialite;

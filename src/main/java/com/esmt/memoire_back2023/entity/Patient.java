@@ -72,9 +72,10 @@ public class Patient {
         this.email = email;
         this.adresse = adresse;
         this.dossierMedical = dossierMedical;
+
     }
 
-    public Patient(Long idPatient, String nom, String prenom, String sexe, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, String profession, String groupe_sanguin, DossierMedical dossierMedical, Long personnel_id) {
+    public Patient(Long idPatient, String nom, String prenom, String sexe,String dateCreation, String dateNaissance, String lieuNaissance, String telephone, String email, String adresse, String profession, String groupe_sanguin, DossierMedical dossierMedical, Long personnel_id) {
         this.idPatient = idPatient;
         this.nom = nom;
         this.prenom = prenom;
@@ -87,6 +88,7 @@ public class Patient {
         this.profession = profession;
         this.groupe_sanguin = groupe_sanguin;
         this.dossierMedical = dossierMedical;
+
         this.personnel_id = personnel_id;
     }
 
@@ -189,6 +191,7 @@ public class Patient {
     public void setGroupe_sanguin(String groupe_sanguin) {
         this.groupe_sanguin = groupe_sanguin;
     }
+
 
 
     public Long getPersonnel_id() {

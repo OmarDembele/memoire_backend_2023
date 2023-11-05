@@ -31,7 +31,7 @@ public class PersonnelsController {
         return personnels;
     }
     @GetMapping(path = "/list")
-    public List<PersonnelsDTO> getAllPersonnels() {
+    public List<Personnels> getAllPersonnels() {
         return personnelService.getallPersonnels();
     }
 
