@@ -57,35 +57,7 @@ public class PersonnelImpl implements PersonnelService {
 
     }
 
-    //public List<PersonnelsDTO> getallPersonnels() {
-      //  List<Personnels> personnels = personnelsRepository.findAll();
-
-        //convertir la liste des personnels en liste de personnelsDTO
-    // List<PersonnelsDTO> personnelsDTOs = personnels.stream()
-    //          .map(personnel -> new PersonnelsDTO(
-    //                  personnel.getIdPersonnel(),
-    //                  personnel.getNom(),
-    //                  personnel.getPrenom(),
-    //                  personnel.getDateInscription(),
-    //                  personnel.getSexe(),
-    //                  personnel.getLieuNaissance(),
-    //                  personnel.getNumLicence(),
-    //                  personnel.getLogin(),
-    //                  personnel.getPassword(),
-    //                  personnel.getEmail(),
-    //                  personnel.getAdresse(),
-    //                  personnel.getTelephone(),
-    //                  personnel.getDateNaissance(),
-    //                  personnel.getRole(),
-    //                  personnel.getSpecialite(),
-    //                  personnel.getEtat()
-    //          ))
-    //          .collect(Collectors.toList());
-
-    //  return personnelsDTOs;
-
-
-    //}
+  
 
     @Override
     public List<Personnels> getallPersonnels() {
