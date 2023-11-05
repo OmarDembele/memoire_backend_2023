@@ -18,7 +18,7 @@ public class DossierMedical {
     @Column(name = "dateCreation", length = 255)
     private String dateCreation;
 
-    @Column(name = "description", length = 65535 )
+    @Column(name = "description", length = 655535)
     private String description;
 
     public DossierMedical() {

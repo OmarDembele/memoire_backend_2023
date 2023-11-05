@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PatientImpl implements PatientService {
@@ -59,6 +60,11 @@ public class PatientImpl implements PatientService {
         return patientRepository.findByPersonnelId(personnelId);
     }
 
+    @Override
+    public List<Patient> getPatientsByDossierMedical(DossierMedical dossierMedicalId) {
+        return patientRepository.findByDossierMedical(dossierMedicalId);
+    }
+
 
     private Patient convertDTOToEntity(PatientDTO patientDTO){
         Patient patient = new Patient();
@@ -94,9 +100,9 @@ public class PatientImpl implements PatientService {
 
     @Override
     public Patient updatePatient(Long id, PatientDTO patientDTO) {
-        // Buscar el paciente por su ID
-        Patient existingPatient = patientRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Patient non trouvé avec l'ID : " + id));
+        Optional<Patient> optionalPatient = patientRepository.findById(id);
+
+        Patient existingPatient = optionalPatient.get();
 
         existingPatient.setNom(patientDTO.getNom());
         existingPatient.setPrenom(patientDTO.getPrenom());
@@ -106,15 +112,10 @@ public class PatientImpl implements PatientService {
         existingPatient.setAdresse(patientDTO.getAdresse());
         existingPatient.setEmail(patientDTO.getEmail());
         existingPatient.setTelephone(patientDTO.getTelephone());
-
-        // Si el DTO proporciona un ID de DossierMedical, actualiza el DossierMedical asociado.
-        if (patientDTO.getDossierMedicalId() != null) {
-            DossierMedical dossierMedical = dossierMedicalRepository.findById(patientDTO.getDossierMedicalId())
-                    .orElseThrow(() -> new EntityNotFoundException("DossierMedical non trouvé avec l'ID : " + patientDTO.getDossierMedicalId()));
-            existingPatient.setDossierMedical(dossierMedical);
-        }
-
-        // Guardar el paciente actualizado en la base de datos
+        existingPatient.setProfession(patientDTO.getProfession());
+        existingPatient.setGroupe_sanguin((patientDTO.getGroupe_sanguin()));
+        existingPatient.setPersonnel_id(patientDTO.getPersonnel_id());
+        //dossierMedicalRepository.save()
         return patientRepository.save(existingPatient);
     }
 

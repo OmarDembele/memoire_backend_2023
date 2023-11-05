@@ -1,6 +1,7 @@
 package com.esmt.memoire_back2023.controller;
 
 import com.esmt.memoire_back2023.dto.PatientDTO;
+import com.esmt.memoire_back2023.entity.DossierMedical;
 import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.repository.DossierRepository;
 import com.esmt.memoire_back2023.repository.PatientRepository;
@@ -71,4 +72,11 @@ public class PatientController {
         List<Patient> patients = patientService.getPatientByPersonnel(personnelId);
         return patients;
     }
+
+    @GetMapping("/patients/{dossierMedicalId}")
+    public List<Patient> getPatients(@PathVariable DossierMedical dossierMedicalId) {
+        List<Patient> patients = patientService.getPatientsByDossierMedical(dossierMedicalId);
+        return patients;
+    }
+
 }

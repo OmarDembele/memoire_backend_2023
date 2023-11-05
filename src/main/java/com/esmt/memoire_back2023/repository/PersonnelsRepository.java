@@ -18,6 +18,9 @@ public interface PersonnelsRepository extends JpaRepository<Personnels, Long> {
 
     Personnels findByLogin(String login);
 
+    @Query("SELECT p FROM Personnels p WHERE p.role = 'MEDECIN'")
+    List<Personnels> findMedecins();
+
     @Query("SELECT p FROM Personnels p WHERE p.role = ?1")
     List<Personnels> findByRole(UserRole role);
 

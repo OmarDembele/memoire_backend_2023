@@ -5,20 +5,24 @@ public class PrescriptionDTO {
 
     private Long id;
 
-    private Long dossierMedical_id;
+    private Long dossier_medicalId;
+
+    private Long personnel;
 
     private String type;
 
     private String instruction;
 
+
     public PrescriptionDTO() {
     }
 
-    public PrescriptionDTO(Long id, Long dossierMedical_id, String type, String instruction) {
+    public PrescriptionDTO(Long id, Long dossierMedical_id, String type, String instruction, Long personnel) {
         this.id = id;
-        this.dossierMedical_id = dossierMedical_id;
+        this.dossier_medicalId = dossierMedical_id;
         this.type = type;
         this.instruction = instruction;
+        this.personnel = personnel;
     }
 
     public Long getId() {
@@ -29,13 +33,6 @@ public class PrescriptionDTO {
         this.id = id;
     }
 
-    public Long getDossierMedical_id() {
-        return dossierMedical_id;
-    }
-
-    public void setDossierMedical_id(Long dossierMedical_id) {
-        this.dossierMedical_id = dossierMedical_id;
-    }
 
     public String getType() {
         return type;
@@ -51,6 +48,22 @@ public class PrescriptionDTO {
 
     public void setInstruction(String instruction) {
         this.instruction = instruction;
+    }
+
+    public Long getDossier_medicalId() {
+        return dossier_medicalId;
+    }
+
+    public void setDossier_medicalId(Long dossier_medicalId) {
+        this.dossier_medicalId = dossier_medicalId;
+    }
+
+    public Long getPersonnel() {
+        return personnel;
+    }
+
+    public void setPerosnnel(Long personnel) {
+        this.personnel = personnel;
     }
 }
 

@@ -14,7 +14,9 @@ public class ExamenDTO {
 
     private String resultat;
 
-    private Long dossierMedical_id;
+    private Long dossier_medical_id;
+
+    private Long personnel;
 
     public ExamenDTO() {
     }
@@ -25,11 +27,12 @@ public class ExamenDTO {
         this.resultat = resultat;
     }
 
-    public ExamenDTO(Long id, String type, String resultat, Long dossierMedical_id) {
+    public ExamenDTO(Long id, String type, String resultat, Long dossierMedical_id, Long personnel) {
         this.id = id;
         this.type = type;
         this.resultat = resultat;
-        this.dossierMedical_id = dossierMedical_id;
+        this.dossier_medical_id = dossierMedical_id;
+        this.personnel = personnel;
     }
 
     public Long getId() {
@@ -56,12 +59,20 @@ public class ExamenDTO {
         this.resultat = resultat;
     }
 
-    public Long getDossierMedical_id() {
-        return dossierMedical_id;
+    public Long getDossier_medical_id() {
+        return dossier_medical_id;
     }
 
-    public void setDossierMedical_id(Long dossierMedical_id) {
-        this.dossierMedical_id = dossierMedical_id;
+    public void setDossier_medical_id(Long dossier_medical_id) {
+        this.dossier_medical_id = dossier_medical_id;
+    }
+
+    public Long getPersonnel() {
+        return personnel;
+    }
+
+    public void setPersonnel(Long personnel) {
+        this.personnel = personnel;
     }
 }
 

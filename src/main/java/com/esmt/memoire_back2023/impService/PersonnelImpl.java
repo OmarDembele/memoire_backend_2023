@@ -1,7 +1,6 @@
 package com.esmt.memoire_back2023.impService;
 
 import com.esmt.memoire_back2023.dto.PersonnelsDTO;
-import com.esmt.memoire_back2023.entity.Patient;
 import com.esmt.memoire_back2023.entity.Personnels;
 import com.esmt.memoire_back2023.entity.UserRole;
 import com.esmt.memoire_back2023.repository.PersonnelsRepository;
@@ -57,36 +56,6 @@ public class PersonnelImpl implements PersonnelService {
 
     }
 
-    //public List<PersonnelsDTO> getallPersonnels() {
-      //  List<Personnels> personnels = personnelsRepository.findAll();
-
-        //convertir la liste des personnels en liste de personnelsDTO
-    // List<PersonnelsDTO> personnelsDTOs = personnels.stream()
-    //          .map(personnel -> new PersonnelsDTO(
-    //                  personnel.getIdPersonnel(),
-    //                  personnel.getNom(),
-    //                  personnel.getPrenom(),
-    //                  personnel.getDateInscription(),
-    //                  personnel.getSexe(),
-    //                  personnel.getLieuNaissance(),
-    //                  personnel.getNumLicence(),
-    //                  personnel.getLogin(),
-    //                  personnel.getPassword(),
-    //                  personnel.getEmail(),
-    //                  personnel.getAdresse(),
-    //                  personnel.getTelephone(),
-    //                  personnel.getDateNaissance(),
-    //                  personnel.getRole(),
-    //                  personnel.getSpecialite(),
-    //                  personnel.getEtat()
-    //          ))
-    //          .collect(Collectors.toList());
-
-    //  return personnelsDTOs;
-
-
-    //}
-
     @Override
     public List<Personnels> getallPersonnels() {
         return personnelsRepository.findAll();
@@ -141,6 +110,11 @@ public class PersonnelImpl implements PersonnelService {
         updatedPersonnels = personnelsRepository.save(updatedPersonnels);
 
         return updatedPersonnels;
+    }
+
+    @Override
+    public List<Personnels> getMedecins() {
+        return personnelsRepository.findMedecins();
     }
 
 }

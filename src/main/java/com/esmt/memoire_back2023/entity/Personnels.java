@@ -185,7 +185,7 @@ public class Personnels{
         this.password = password;
     }
 
-   public void setDateNaissance(String dateNaissance) {
+    public void setDateNaissance(String dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
     public void setAdresse(String adresse) {
@@ -212,4 +212,3 @@ public class Personnels{
     }
 
 }
-

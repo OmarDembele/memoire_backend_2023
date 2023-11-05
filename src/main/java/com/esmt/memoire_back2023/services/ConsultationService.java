@@ -14,5 +14,7 @@ public interface ConsultationService {
 
     void deleteConsultation(Long id);
 
+    List<Consultation> getConsultationsByDossierMedical(Long dossierMedicalId);
+
 
 }
